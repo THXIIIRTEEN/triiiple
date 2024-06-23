@@ -1,0 +1,8 @@
+.authorization_block {
+  background: url(./windows-11-bloom-3840x2160-14430.jpg);
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  padding: 4% 6%;
+  display: flex;
+}

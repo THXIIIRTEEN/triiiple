@@ -1,0 +1,296 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(../../../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+.authorization_h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.authorization_greetings {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login_block {
+    width: 400px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 45px;
+    backdrop-filter: blur(28.2px);
+    background: linear-gradient(135.00deg, rgba(255, 255, 255, 0.07) 0%,rgba(83, 96, 221, 0.26) 100%),url(./images/specs.png);
+    background-size: contain;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.525);
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.login_form {
+    border-radius: 45px;
+    background: linear-gradient(135.00deg, rgba(255, 255, 255, 1) 0%,rgb(68, 117, 255) 100%);
+    width: 100%;
+    height: 68%;
+    padding: 12% 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.greeting_block {
+  padding: 22% 8% 6% 8%;
+  width: 100%;
+  height: 32%;
+}
+
+.form_label {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.form_label:nth-child(3) {
+    margin-top: 6%;
+}
+
+.form_input {
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: linear-gradient(90.00deg, rgba(255, 255, 255, 0.4),rgba(255, 255, 255, 0.4) 100%);
+    height: 42px;
+    border: solid;
+    border-width: 1px;
+    border-color: white;
+    padding: 2% 3%;
+    margin: 3% 0%;
+    color: #0060F0;
+    font-weight: 500;
+    font-size: 13px;
+    font-family: Montserrat;
+}
+
+.form_input:auto-fill {
+    background-color: #BFCEFC;
+}
+
+.form_input::placeholder {
+    color: #0060F0;
+    font-weight: 500;
+    font-size: 13px;
+    font-family: Montserrat;
+}
+
+.form_link {
+    color: #0060F0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form_button {
+    background: linear-gradient(135.00deg, rgb(73, 146, 255) 0%,rgb(0, 96, 240) 100%);
+    padding: 5% 0%;
+    border-radius: 12px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: Montserrat;
+    transition: 0.2s;
+}
+
+.form_button:hover {
+    box-shadow: 0 0 35px 0 #3686ff;
+    transform: scale(1.05);
+}
+
+.registration_link {
+    color: white;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.login_form_section {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6%;
+}
+
+.file_input {
+    color: rgba(0,0,0,0);
+}
+
+.profile_input__block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 93.9%);
+    border-radius: 28px;
+    border: solid 1px white;
+    width: 110%;
+    margin: 0% -5%;
+    box-sizing: border-box;
+    padding: 0% 2%;
+    margin-top: 6%;
+}
+
+.profile_input__background {
+    background: url(./images/profile.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 140px;
+    height: 140px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    transition: 0.2s;
+}
+
+.profile_input {
+    width: 100%;
+    height: 100%;
+    color: rgba(0,0,0,0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.profile_input__background:hover {
+    transform: scale(1.05);
+}
+
+.profile_input__right-section {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    padding: 4%;
+    box-sizing: border-box;
+}
+
+.blue-gradient-text {
+    background: linear-gradient(135deg, #4992ff 0%, #0060f0 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 32px;
+}
+
+.black-supportive-text {
+    color: black;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.profile_main-block {
+    display: flex;
+}
+
+.textarea_label {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 4%;
+    margin-top: 2%;
+}
+
+.textarea {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 93.9%);
+    border-radius: 14px;
+    width: 100%;
+    padding: 6%;
+    box-sizing: border-box;
+    color: #0060F0;
+    font-weight: 400;
+    border: solid 1px white;
+    box-shadow: inset 2px 2px 8px 0 rgba(0, 96, 240, 0.25), inset -2px -2px 8px 0 rgba(255, 255, 255, 0.4);
+    height: 100%;
+    resize: none;
+}
+
+.textarea::-webkit-scrollbar {
+    width: 0px;
+}
+
+.textarea::placeholder {
+    color: #0060F0;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: Montserrat;
+}
+
+.registration_link span {
+    text-decoration: underline;
+}
+
+.user-policy {
+    font-size: 12px !important;
+}
+
+.form_input__error {
+    border: solid 2px #F23F42 !important;
+    animation: shaking 1s ease-in-out;
+    box-sizing: border-box;
+    border-radius: 12px;
+    background: linear-gradient(90.00deg, rgba(255, 255, 255, 0.4),rgba(255, 255, 255, 0.4) 100%);
+    height: 42px;
+    border: solid;
+    border-width: 1px;
+    border-color: white;
+    padding: 2% 3%;
+    margin: 3% 0% 1% 0%;
+    color: #0060F0;
+    font-weight: 500;
+    font-size: 13px;
+    font-family: Montserrat;
+}
+
+.form_input__error {
+    color: #0060F0;
+    font-weight: 500;
+    font-size: 13px;
+    font-family: Montserrat;
+}
+
+@keyframes shaking {
+    0% {
+      margin-left: -2%;
+      margin-right: 2%;
+    }
+    20% {
+      margin-left: 2%;
+      margin-right: -2%;
+    }
+    40% {
+      margin-left: -2%;
+      margin-right: 2%;
+    }
+    60% {
+      margin-left: 2%;
+      margin-right: -2%;
+    }
+    80% {
+      margin-left: -2%;
+      margin-right: 2%;
+    }
+    100% {
+      margin-left: 0%;
+      margin-right: 0%;
+    }
+}
