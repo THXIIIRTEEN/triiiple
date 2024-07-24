@@ -1,9 +1,8 @@
-import { getFunction } from "@/app/authorization/data-utils/data-functions";
-import bcrypt from "bcryptjs-react";
+import { loginFunction } from "../../authorization/data-utils/data-functions";
 
-export const checkUserData = (event, options) => {
+export const checkUserData = async (event, options) => {
 
-    const { setIsCorrect, setUserDontExist, router } = options;
+    const { setIsCorrect, setUserDontExist, router, store } = options;
 
     event.preventDefault;
 
@@ -25,24 +24,16 @@ export const checkUserData = (event, options) => {
         password: document.getElementById('password').value
     }
 
-        const getUserData = async () => {
-            const userArray = await getFunction("/user");
+    const user = await loginFunction('/login', userData);
 
-            for (let i = 0; i < userArray.length; i++) {
+    if (user) {    
+        await store.login(user);
+        await store.auth();
+        setUserDontExist(false); 
+        router.push(`/profile/${user.username}`); 
+    } 
 
-                if (userArray[i].username === userData.username && bcrypt.compareSync(userData.password, userArray[i].password) === true) {
-                    router.push('/profile')
-                    setUserDontExist(false); 
-                    break                    
-                } 
-
-                else {
-                    setUserDontExist(true);     
-                }
-
-            }
-
-        };
-
-        getUserData()
-    };
+    else if (!user) {
+        setUserDontExist(true);     
+    }
+};

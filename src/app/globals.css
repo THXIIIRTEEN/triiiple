@@ -128,6 +128,17 @@ a:hover {
   margin: 0% 0% 4% 0%;
 }
 
+.error-message_avatar {
+  color: #F23F42;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 2% 0% 4% 0%;
+}
+
+.error-block {
+  border: solid 2px #F23F42 !important;
+}
+
 .error-input {
   border: solid 2px #F23F42 !important;
   animation: shaking 1s ease-in-out;
@@ -173,7 +184,7 @@ a:hover {
   min-height: 100vh;
   padding: 4% 4%;
   display: flex;
-  position: relative;
+  position: fixed;
   z-index: 0;
   justify-content: space-between;
 }
@@ -182,7 +193,7 @@ a:hover {
   content: '';
   width: 100vw;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   display: block;

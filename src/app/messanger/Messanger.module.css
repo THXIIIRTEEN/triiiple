@@ -178,3 +178,7 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.messanger_messages-list a:hover {
+    text-decoration: none !important;
+}

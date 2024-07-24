@@ -45,7 +45,7 @@ export default function RegistrationForm() {
                 <p className={Styles['authorization_greetings']}>Добро пожаловать!</p> 
             </div>
             
-            <form className={Styles['login_form']}>
+            <form className={Styles['login_form']} encType={"multipart/form-data"}>
                 { secondPage == false && (
                     <FirstPage isIdentical = {isIdentical} isUserExist = {isUserExist} PasswordLengthError = {PasswordLengthError} UsernameLengthError = {UsernameLengthError} options = {options}/>
                  ) } 

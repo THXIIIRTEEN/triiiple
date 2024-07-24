@@ -1,7 +1,10 @@
+"user server"
+
 import "./globals.css";
 import Background from "./news/page.jsx";
 
-export default function Home() {
+export default async function Home() {
+
   return (
     <>
       <Background>

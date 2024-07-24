@@ -137,6 +137,14 @@
     gap: 18px;
 }
 
+.profile-picture {
+    object-fit: cover;
+}
+
+.friend-profile_t-block-buttons__requests {
+    margin-top: 15%;
+}
+
 .friend-profile_t-block-buttons button {
     width: 32px;
     height: 32px;
@@ -193,8 +201,51 @@
     gap: 16px 24px;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 }
 
 .friend-profile_background {
     width: 47%;
+}
+
+.link {
+    display: flex;
+    position: relative;
+    z-index: 100;
+}
+
+.text span {
+    background-color: #0060f0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border-radius: 100%;
+    font-size: 20px;
+}
+
+.text h2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.friend-req_length span {
+    background-color: #0060f0;
+    width: 15px !important;
+    height: 15px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    border-radius: 100%;
+    font-size: 14px;
+}
+
+.friend-req_length {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

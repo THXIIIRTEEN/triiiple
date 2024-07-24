@@ -1,8 +1,9 @@
+import Link from "next/link"
 import Styles from "../Messanger.module.css"
-
 export default function Message() {
     return (
-        <div className={Styles['message']}>
+        <Link className="message" href={"#"}>
+            <div className={Styles['message']}>
             <img src="/images/friends/avatar.png"/>
 
             <div className={Styles['message_text-block']}>
@@ -21,5 +22,6 @@ export default function Message() {
                 <img src="/images/messanger/three-points.svg"/>
             </button>
         </div>
+        </Link>
     )
 }

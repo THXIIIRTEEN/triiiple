@@ -45,17 +45,29 @@
     flex-direction: row;
     align-items: center;
     gap: 2%;
+    justify-content: space-between;
 }
 
 .news-block_banner {
     width: 100%;
     margin: 3% 0% 1% 0%;
+    object-fit: cover;
+    height: 300px;
 }
 
 .new-block_text {
     color: black;
     font-weight: 500 !important;
     margin: 0% !important;
+    font-size: 18px !important;
+}
+
+.new-block_text__large {
+    color: black;
+    font-weight: 500 !important;
+    margin: 0% !important;
+    font-size: 18px !important;
+    margin: 2% 0% 2% 0% !important;
 }
 
 .new-block_buttons button {
@@ -110,6 +122,38 @@
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 93.9%);
 }
 
+.comment-block_error {
+    border: solid 2px #F23F42 !important;
+    animation: shaking 1s ease-in-out;
+}
+
+@keyframes shaking {
+    0% {
+      margin-left: -2%;
+      margin-right: 2%;
+    }
+    20% {
+      margin-left: 2%;
+      margin-right: -2%;
+    }
+    40% {
+      margin-left: -2%;
+      margin-right: 2%;
+    }
+    60% {
+      margin-left: 2%;
+      margin-right: -2%;
+    }
+    80% {
+      margin-left: -2%;
+      margin-right: 2%;
+    }
+    100% {
+      margin-left: 0%;
+      margin-right: 0%;
+    }
+  }
+
 .comment-block input {
     border: none;
     background: none;
@@ -154,4 +198,47 @@
     height: 100%;
     border: none;
     border-radius: 0 !important;
+}
+
+.comment {
+    margin-top: 4%;
+    box-sizing: border-box !important;
+}
+
+.comments_count {
+    color: #0060F0;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    margin: 0% !important;
+    display: flex;
+    width: min-content !important;
+}
+
+.delete-button {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    cursor: pointer !important;
+}
+
+.delete-button_image {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.delete-button:hover {
+    transform: scale(1.1);
+}
+
+.news-block_user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3%;
+    width: 60%;
 }

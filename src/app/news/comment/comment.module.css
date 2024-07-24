@@ -1,0 +1,106 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(/public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+.comment-block {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 95%);
+    color: black;
+    display: flex;
+    flex-direction: row;
+    font-family: Montserrat;
+    padding: 2%;
+    border-radius: 14px;
+    border: solid 1px white;
+    margin: 2% 0%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.comment-block img {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    border: solid 2px white;
+    box-shadow: 5px 5px 7px 0 rgba(68, 117, 255, 0.25), -5px -5px 18px -8px rgba(255, 255, 255, 0.25);
+    margin: 0% !important;
+}
+
+.comment-block a {
+    margin: 0% 2% 0% 0%;
+}
+
+.comment-block h1 {
+    color: black;
+    font-weight: 700;
+    font-size: 18px !important;
+    font-family: Montserrat;
+}
+
+.comment-block p {
+    color: black;
+    font-size: 12px;
+    font-family: Montserrat;
+}
+
+.comment-text {
+    margin: 0% !important;
+    font-weight: 400 !important;
+    width: 80% !important;
+    margin-top: 0.2% !important;
+}
+
+.comment-date {
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    color: #0060f0 !important;
+    margin-bottom: 0% !important;
+    font-family: Montserrat;
+    margin-left: 2% !important;
+    margin-top: 0% !important;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center !important;
+}
+
+.text-top {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.delete-button {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 15px !important;
+    height: 15px !important;
+    cursor: pointer !important;
+}
+
+.delete-button_image {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.delete-button:hover {
+    transform: scale(1.1);
+}
+
+.username-and-date {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    align-items: center;
+}

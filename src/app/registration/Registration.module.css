@@ -150,14 +150,16 @@
 .profile_input__background {
     background: url(./images/profile.svg);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    width: 140px;
-    height: 140px;
+    width: 120px;
+    height: 120px;
     position: relative;
     display: flex;
     flex-direction: row;
     transition: 0.2s;
+    border-radius: 100%;
+    margin: 4% 0% 4% 4%;
 }
 
 .profile_input {

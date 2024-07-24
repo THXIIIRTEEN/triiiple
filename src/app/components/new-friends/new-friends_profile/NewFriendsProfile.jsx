@@ -1,11 +1,26 @@
+import Link from "next/link"
 import Styles from "../NewFriends.module.css"
+import { useEffect, useState } from "react"
 
-export default function NewFriendsProfile() {
+export default function NewFriendsProfile(props) {
+
+    const [username, setUsername] = useState(props.username)
+
+    useEffect(() => {
+        if (props.username.length > 10) {
+            const maxLength = 10;
+            const str = username;
+            setUsername(str.slice(0, maxLength - 3) + '...')
+        }
+    })
+
     return (
         <li>
-            <img src="/images/new-block/friend_pfp.png"/>
-            <h3>DaCoconut</h3>
-            <button>+</button>
+            <Link href={`http://localhost:3000/profile/${props.username}`}>
+                <img src={props.profile}/>
+                <h3>{username}</h3>
+                <button>+</button>
+            </Link>
         </li>
     )
 }

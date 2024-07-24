@@ -1,8 +1,8 @@
-import { getFunction, loginCheckUser, postFunction } from "../../authorization/data-utils/data-functions";
+import { postFunction, checkUserExist } from "../../authorization/data-utils/data-functions";
 
-export const setObjectData = (event, options) => {
+export const setObjectData = async(event, options) => {
 
-    const { router, setSecondPage, setIdentical, setIsUserExist, userData, setPasswordLengthError, setUsernameLengthError } = options
+    const { router, setSecondPage, setIdentical, setIsUserExist, userData, setPasswordLengthError, setUsernameLengthError } = options;
 
     event.preventDefault;
         userData.username = document.getElementById('username').value;
@@ -20,6 +20,8 @@ export const setObjectData = (event, options) => {
             let inputArray = document.getElementsByTagName('input');
             inputArray = Array.from(inputArray);
 
+            const isUserExist = await checkUserExist("/registration", {username: userData.username});
+
             inputArray.forEach((inputАField) => {
                 if (inputАField.value == "") {
                     inputАField.classList.add("error-input");
@@ -35,46 +37,45 @@ export const setObjectData = (event, options) => {
                     document.getElementById('username').classList.add("error-input");
                     setUsernameLengthError(true);
                 }
-
+                
                 else {
-                    setSecondPage(true);
+                    if (!isUserExist) {
+                        setSecondPage(true);
+                    }
+                    setIsUserExist(true)
                 }
-            });
-            
+            });       
         }
 }
 
 export const createNewUser = async(event, options) => {
 
-    const { router, setSecondPage, setIdentical, setIsUserExist, userData } = options
+    const { router, setSecondPage, setIdentical, setIsUserExist, userData } = options;
+
+    const getFileExtension = (file) => {
+        const parts = file.name.split('.');
+        return parts[parts.length - 1];
+    }
 
     event.preventDefault;
-        userData.profile = document.getElementById('profile').value;
+
+        const profile_file = document.getElementById('profile').files[0];
+
+        const fileExtension = getFileExtension(profile_file);
+
+        const formData = new FormData();
+
+        const profile_file_toSend = new File([profile_file], `${userData.username}.${fileExtension}`, { type: profile_file.type })
+
+        formData.append("profile", profile_file_toSend);
+
+        userData.profile = "null";
         userData.about_user = document.getElementById('textarea').value;
 
-        const userArray = await getFunction("/user");
+        formData.append("userData", JSON.stringify(userData))
 
-        const checkUser = () => {
-            for (let i = 0; i < userArray.length; i++) {
-                if (userArray[i].username == userData.username) {
-                    return true;
-                } 
-            };
-        }
+        postFunction(formData, "/user");
+        router.push("/login")
 
-        const checkUserResult = () => {
-            const res = checkUser();
-
-            if (res == true) {
-                setSecondPage(false);
-                setIsUserExist(true)
-            }
-
-            else if (res != true) {
-                postFunction(userData, "/user")
-                router.push("/login")
-            };            
-        }       
-
-        checkUserResult();
 }
+

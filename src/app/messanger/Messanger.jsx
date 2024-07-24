@@ -2,6 +2,7 @@ import Styles from "./Messanger.module.css"
 import Message from "./message/Message"
 
 export default function Messanger() {
+
     return (
         <div className={Styles['messanger_background']}>
             <div>

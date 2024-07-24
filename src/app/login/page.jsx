@@ -8,6 +8,7 @@ import { notEmptyCheck } from "../authorization/correctFormFunctions/correctForm
 import { checkUserData } from "./login_functions/login_functions";
 
 import { useRouter } from "next/navigation";
+import { useStore } from "../authorization/data-utils/zustand-functions";
 
 export default function LoginForm () {
 
@@ -19,7 +20,8 @@ export default function LoginForm () {
     const options = {
         setIsCorrect: setIsCorrect,
         setUserDontExist: setUserDontExist,
-        router: router
+        router: router,
+        store: useStore()
     }
 
     return (
