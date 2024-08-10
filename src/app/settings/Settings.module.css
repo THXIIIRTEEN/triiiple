@@ -1,0 +1,265 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(../../../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+
+.settings_block {
+    z-index: 10;
+    position: relative;
+    margin-left: 10vw;
+    margin-right: calc(3vw + 300px);
+    backdrop-filter: blur(30px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(83, 96, 221, 0.08) 100%);
+    border-radius: 26px;
+    padding: 4% 4%;
+    border: solid 1px white;
+    height: max-content;
+    box-sizing: border-box;
+    width: 50vw;
+}
+
+.settings_block_main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 8%;
+    backdrop-filter: blur(30px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(83, 96, 221, 0.2) 100%);
+    border-radius: 18px;
+    border: solid 1px white;
+    padding: 6% 4%;
+    align-items: flex-start;
+}
+
+.settings_block h1 {
+    font-size: 36px;
+    margin-bottom: 4%;
+}
+
+.settings_block h2 {
+    font-size: 28px;
+    margin-bottom: 1%;
+    cursor: pointer;
+    user-select: none;
+}
+
+.settings_block_category-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 5px;
+}
+
+.settings_block_category-name button {
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.settings_block_category-name button img {
+    width: 100%;
+    height: 100%;
+}
+
+.settings_block_category-name button:hover {
+    transform: scale(1.1);
+}
+
+.settings_profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 35px;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.settings_block_main-content p {
+    margin-bottom: 4%;
+}
+
+.profile-picture_input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 500;
+}
+
+.profile-picture_input__stylized {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 150px;
+    height: 150px;
+    background-color: black;
+    opacity: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30%;
+    border-radius: 35px;
+}
+
+.profile-picture_input__stylized img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0% !important;
+}
+
+.profile-picture_block {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin-top: 8%;
+    transition: 0.1s;
+}
+
+.username_input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%);
+    padding: 2% 4%;
+    border: solid 1px white;
+    border-radius: 12px;
+}
+
+.username_input input {
+    background: none;
+    border: none;
+    color: #0060F0;
+}
+
+.username_input input::placeholder {
+    color: #0060F0;
+    font-weight: 500;
+}
+
+.username_input input:focus {
+    outline: none;
+}
+
+.username_input button {
+    box-shadow: 5px 5px 7px 0 rgba(68, 117, 255, 0.25), -5px -5px 18px -8px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, #4992ff 0%, #0060f0 100%);
+    border: none;
+    padding: 2%;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.1s;
+    width: 25px;
+    height: 25px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.username_input button:hover {
+    transform: scale(1.1);
+}
+
+.username_input button img {
+    width: 100%;
+    height: 100%;
+}
+
+.settings_block_main-content form {
+    margin-bottom: 4%;
+}
+
+.settings_block_main-content form textarea {
+    background: none;
+    border: none;
+    color: #0060F0;
+    width: 80% !important;
+}
+
+.settings_block_main-content form textarea::placeholder {
+    color: #0060F0;
+}
+
+.settings_block_main-content form textarea:focus {
+    outline: none;
+}
+
+.about-user_input {
+    align-items: flex-start;
+}
+
+.password_input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.password_input label {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 2%;
+    font-size: 18px;
+}
+
+.password_input input {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 100%);
+    padding: 2% 4%;
+    border: solid 1px white;
+    border-radius: 12px;
+    color: #0060F0;
+    margin-bottom: 4%;
+}
+
+.password_input input::placeholder {
+    color: #0060F0;
+}
+
+.password_input button {
+    box-shadow: 5px 5px 7px 0 rgba(68, 117, 255, 0.25), -5px -5px 18px -8px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, #4992ff 0%, #0060f0 100%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    font-size: 16px;
+    padding: 3% 4%;
+    border: none;
+    border-radius: 10px;
+    gap: 4px;
+    cursor: pointer;
+    transition: 0.1s;
+    margin-top: 2%;
+}
+
+.password_input button:hover {
+    transform: scale(1.1);
+}
+
+.password_input button img {
+    width: 14px;
+    height: 14px;
+}
+
+.error-message {
+    color: #ff0408;
+    font-weight: 600;
+    font-size: 12px;
+    margin: -3% 0% 0% 0%;
+}
+
+@media screen and (min-width: 1900px) {
+    .settings_block h1 {
+        font-size: 44px;
+    }
+}

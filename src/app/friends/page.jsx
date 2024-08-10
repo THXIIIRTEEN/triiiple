@@ -1,9 +1,13 @@
 "use client"
 
+//SERVER FUNCTIONS
+
+import { useStore } from "../authorization/data-utils/zustand-functions";
+
+//COMPONENTS
+
 import Header from "../components/Header/Header";
 import NewFriends from "../components/new-friends/NewFriends";
-import FriendsList from "./FriendsList/FriendsList";
-import { useStore } from "../authorization/data-utils/zustand-functions";
 import Preloader from "../components/Preloader/preloader";
 import FriendsPage from "./FriendsPage/FriendsPage";
 

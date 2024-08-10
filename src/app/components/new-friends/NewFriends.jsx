@@ -1,15 +1,26 @@
-import { useStore } from "@/app/authorization/data-utils/zustand-functions"
-import Styles from "./NewFriends.module.css"
-import NewFriendsProfile from "./new-friends_profile/NewFriendsProfile"
-import { friendUtils } from "@/app/friends/FriendFunctions/FriendFunctions"
+//SERVER FUNCTIONS
+
+import { useStore } from "@/app/authorization/data-utils/zustand-functions";
+import { friendUtils } from "@/app/friends/FriendFunctions/FriendFunctions";
+
+//STYLES
+
+import Styles from "./NewFriends.module.css";
+
+//COMPONENTS
+
+import NewFriendsProfile from "./new-friends_profile/NewFriendsProfile";
+
+//REACT IMPORTS
+
 import { useEffect, useState } from "react"
 
 export default function NewFriends() {
 
-    const [userArray, setUserArray] = useState(null)
+    const user = useStore().user;
 
-    const user = useStore().user
-    
+    const [userArray, setUserArray] = useState(null);
+
     const getUsers = async () => {
         const usersArray = await friendUtils.getRandomUsers(user._id)
         setUserArray(usersArray)

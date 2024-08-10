@@ -3,7 +3,6 @@
     src: url(/public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 
-
 .news-block_background {
     background: linear-gradient(135deg, #fff 0%, #4475ff 100%);
     padding: 4%;
@@ -241,4 +240,14 @@
     align-items: center;
     gap: 3%;
     width: 60%;
+}
+
+@media screen and (min-width: 1900px) {
+    .new-block_top__user h6 {
+        font-size: 27px;
+    }
+
+    .new-block_buttons {
+        gap: 2%;
+    }
 }

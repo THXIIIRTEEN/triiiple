@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { checkUserExist, loginFunction, verifyJWT } from "./data-functions";
+import { postServerFunction, loginFunction, verifyJWT } from "./data-functions";
 import { getJWT, setJWT } from "./jwt-functions";
 
 export const useStore = create((set) => ({
@@ -15,7 +15,7 @@ export const useStore = create((set) => ({
         if (token) {
             const verifiedToken = await verifyJWT('/verification', {token: token});
             const userID = verifiedToken._id;
-            const user = await checkUserExist('/userByID', {id: userID})
+            const user = await postServerFunction('/userByID', {id: userID})
             set({ isAuth: true, user: user })
             return {
                 token: token,

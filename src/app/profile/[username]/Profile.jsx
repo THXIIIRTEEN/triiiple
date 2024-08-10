@@ -1,26 +1,49 @@
 "use client"
 
+// SERVER FUNCTIONS
+
 import { postUtils } from "@/app/news/data-functions/postFunction";
-import { useStore } from "../../authorization/data-utils/zustand-functions"
-import NewsBlock from "../../news/news-block/NewsBlock"
-import Styles from "./Profile.module.css"
-import { useEffect, useRef, useState } from "react";
+import { useStore } from "../../authorization/data-utils/zustand-functions";
 import { io } from "socket.io-client";
 import { friendUtils } from "@/app/friends/FriendFunctions/FriendFunctions";
+
+//CLIENT FUNCTIONS
+
+import { cancelFriendReq, copyProfileUrl, createChat, publishFunction, sendFriendReq } from "./profile-client-functions/profile-client-functions";
+
+// COMPONENTS
+
+import NewsBlock from "../../news/news-block/NewsBlock"
+
+// STYLES
+import Styles from "./Profile.module.css"
+
+//REACT IMPORTS
+
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Profile( {props} ) {
 
     const [isCorrect, setIsCorrect] = useState(true);
     const [postArray, setPostArray] = useState(null);
     const [sortedPosts, setSortedPosts] = useState(postArray);
-    const [requestSent, setRequestSent] = useState(false)
+    const [requestSent, setRequestSent] = useState(false);
 
     const user = useStore().user;
     const socket = io("http://localhost:3001");
 
-    socket.on('comment updated', (data) => {
-        setPostArray(data)
-    })
+    const router = useRouter();
+
+    useEffect(() => {
+        socket.on('comment updated', (data) => {
+            setPostArray(data)
+        })
+
+        return () => {
+            socket.off('comment updated', {});
+        };
+    }, [])
 
     useEffect(() => {
         if (postArray) {
@@ -42,56 +65,16 @@ export default function Profile( {props} ) {
     const newPostInput = useRef(null);
     const fileInput = useRef(null);
 
-    const publishFunction = (event) => {
-        event.preventDefault();
-
-        const textInputValue = newPostInput.current.value;
-
-        if (textInputValue == "") {
-            setIsCorrect(false);
-        } else if (textInputValue != "") {
-            setIsCorrect(true);
-        }
-        
-        if (isCorrect === true) {
-            const postFormData = new FormData();
-            const postUserData = {
-                author: user.username,
-                time: new Date(),
-                text: textInputValue
-            };
-            const postFilePicture = fileInput.current.files[0];
-            postFormData.append("userData", JSON.stringify(postUserData));
-            if (postFilePicture != "") {
-                postFormData.append("postPicture", postFilePicture);
-            }
-            postUtils.newPost(postFormData)
-            location.reload()
-        }
-    }
-
-    const copyProfileUrl = (event) => {
-        event.preventDefault();
-        const url = window.location.href;
-        navigator.clipboard.writeText(url)
-    }
-
-    const sendFriendReq = async(event) => {
-        event.preventDefault();
-        setRequestSent(!requestSent)
-        const res = await friendUtils.sendFriendReq(user._id, props._id)
-    }
-
-    const cancelFriendReq = async(event) => {
-        event.preventDefault();
-        setRequestSent(!requestSent)
-        const res = await friendUtils.cancelFriendReq(user._id, props._id)
-    }
     if (props) {
         return (
             <div className={Styles['profile_background']}>
                 <div className={Styles['profile_info-block']}>
-                    <img className={Styles['profile_picture']} src={props.profile} alt="profile"/>
+
+                    {   props.profile === null ?
+                        <img className={Styles['profile_picture']} src="/images/profile/profile_picture.png" alt="profile"/> :
+                        <img className={Styles['profile_picture']} src={props.profile} alt="profile"/>
+                    }
+
                     <div className={Styles['profile_info-block_text-section']}>
                         <div className={Styles['username']}>
                             <h2>{props.username}</h2>
@@ -103,10 +86,10 @@ export default function Profile( {props} ) {
                         {   props.username != user.username &&
                             <div className={Styles['button-section']}>
                                 {   requestSent === false && user.friend_requests.find((req) => req._id === props._id) === undefined && user.friends.find((friend) => friend._id === props._id) === undefined &&
-                                    <button onClick={() => {sendFriendReq(event)}} className={Styles['add-button']}>Добавить в друзья</button>
+                                    <button onClick={() => {sendFriendReq(setRequestSent, requestSent, user, props)}} className={Styles['add-button']}>Добавить в друзья</button>
                                 }
                                 {   requestSent === true && user.friend_requests.find((req) => req._id === props._id) === undefined && user.friends.find((friend) => friend._id === props._id) === undefined &&
-                                    <button onClick={() => {cancelFriendReq(event)}} className={Styles['add-button']}>Отменить запрос</button>
+                                    <button onClick={() => {cancelFriendReq(setRequestSent, requestSent, user, props)}} className={Styles['add-button']}>Отменить запрос</button>
                                 }
                                 {   user.friend_requests.find((req) => req._id === props._id) != undefined &&
                                     <button onClick={() => {friendUtils.acceptReq(user._id, props._id)}} className={Styles['add-button']}>Принять запрос</button>
@@ -114,10 +97,10 @@ export default function Profile( {props} ) {
                                 {   user.friends.find((friend) => friend._id === props._id) != undefined &&
                                     <button onClick={() => {friendUtils.deleteFriend(user._id, props._id)}} className={Styles['add-button']}>Удалить из друзей</button>
                                 }
-                                <button className={Styles['message-button']}>Сообщение</button>
+                                <button onClick={() => {createChat(router, user, props)}} className={Styles['message-button']}>Сообщение</button>
                             </div>
                         }
-                    </div>
+                    </div> 
                 </div>
                 {   postArray &&
                     postArray.length > 0 &&
@@ -140,7 +123,7 @@ export default function Profile( {props} ) {
                                             <input id="file_input" name="postPicture" type="file" ref={fileInput} placeholder="" className={Styles['news-list_file-input']}/>
                                         </div>
 
-                                        <button id="publish" type="submit" onClick={() => {publishFunction(event)}} className={Styles['second-button']}>Опубликовать</button>
+                                        <button id="publish" type="submit" onClick={() => {publishFunction(event, newPostInput, fileInput, setIsCorrect, isCorrect, user)}} className={Styles['second-button']}>Опубликовать</button>
                                     </div>
                                 </form>
                             </>
@@ -157,11 +140,9 @@ export default function Profile( {props} ) {
                                 })}
                             </div> 
                         }
-                    </div>
-                    
+                    </div>      
                 }
             </div>
         )
     }
-
 }

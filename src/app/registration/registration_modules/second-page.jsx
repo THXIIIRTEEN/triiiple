@@ -1,8 +1,16 @@
+//STYLES
+
 import "../../globals.css";
 import Styles from "../Registration.module.css";
+
+//CLIENT FUNCTIONS
+
 import { notEmptyCheck } from "@/app/authorization/correctFormFunctions/correctFormFunctions";
-import Link from "next/link";
 import { createNewUser } from "../registration_functions/registration_functions";
+
+//REACT IMPORTS
+
+import Link from "next/link";
 import { useRef, useEffect, useState } from 'react';
 
 export default function SecondPage(props) {

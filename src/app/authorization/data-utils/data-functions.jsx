@@ -3,12 +3,12 @@
 const serverUrl = "http://localhost:3001";
 
 export const postFunction = async (userData, endpoint) => {
-    await fetch(serverUrl + endpoint, {
+    return await fetch(serverUrl + endpoint, {
         method: 'POST',
         body: userData,
     })
     .then((response) => response.text())
-    .then((data) => {console.log(data)})
+    .then((data) => {return data})
 };
 
 export const loginFunction = async (endpoint, userData) => {
@@ -31,7 +31,7 @@ export const getFunction = async (endpoint) => {
   return result
 }
 
-export const checkUserExist = async (endpoint, username) => {
+export const postServerFunction = async (endpoint, username) => {
   return await fetch(serverUrl + endpoint, {
     method: 'POST',
     body: JSON.stringify(username),

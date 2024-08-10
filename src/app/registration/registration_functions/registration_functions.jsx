@@ -1,4 +1,4 @@
-import { postFunction, checkUserExist } from "../../authorization/data-utils/data-functions";
+import { postFunction, postServerFunction } from "../../authorization/data-utils/data-functions";
 
 export const setObjectData = async(event, options) => {
 
@@ -20,7 +20,7 @@ export const setObjectData = async(event, options) => {
             let inputArray = document.getElementsByTagName('input');
             inputArray = Array.from(inputArray);
 
-            const isUserExist = await checkUserExist("/registration", {username: userData.username});
+            const isUserExist = await postServerFunction("/registration", {username: userData.username});
 
             inputArray.forEach((inputАField) => {
                 if (inputАField.value == "") {
@@ -49,25 +49,26 @@ export const setObjectData = async(event, options) => {
 }
 
 export const createNewUser = async(event, options) => {
+        const { router, setSecondPage, setIdentical, setIsUserExist, userData } = options;
 
-    const { router, setSecondPage, setIdentical, setIsUserExist, userData } = options;
+        event.preventDefault;
 
-    const getFileExtension = (file) => {
-        const parts = file.name.split('.');
-        return parts[parts.length - 1];
-    }
-
-    event.preventDefault;
-
-        const profile_file = document.getElementById('profile').files[0];
-
-        const fileExtension = getFileExtension(profile_file);
+        const getFileExtension = (file) => {
+            const parts = file.name.split('.');
+            return parts[parts.length - 1];
+        }
 
         const formData = new FormData();
 
-        const profile_file_toSend = new File([profile_file], `${userData.username}.${fileExtension}`, { type: profile_file.type })
+        if (document.getElementById('profile').files.length > 0) {
+            const profile_file = document.getElementById('profile').files[0];
 
-        formData.append("profile", profile_file_toSend);
+            const fileExtension = getFileExtension(profile_file);
+
+            const profile_file_toSend = new File([profile_file], `${userData.username}.${fileExtension}`, { type: profile_file.type })
+
+            formData.append("profile", profile_file_toSend);
+        }
 
         userData.profile = "null";
         userData.about_user = document.getElementById('textarea').value;
@@ -76,6 +77,5 @@ export const createNewUser = async(event, options) => {
 
         postFunction(formData, "/user");
         router.push("/login")
-
 }
 

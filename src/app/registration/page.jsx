@@ -1,12 +1,18 @@
 "use client"
 
-import Styles from "./Registration.module.css";
-import { useMemo, useState } from "react";
-
-import { useRouter } from "next/navigation";
+//COMPONENTS
 
 import FirstPage from "./registration_modules/first-page";
 import SecondPage from "./registration_modules/second-page";
+
+//STYLES
+
+import Styles from "./Registration.module.css";
+
+//REACT IMPORTS
+
+import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegistrationForm() {
 

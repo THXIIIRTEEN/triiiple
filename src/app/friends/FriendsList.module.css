@@ -98,6 +98,10 @@
     border-radius: 12px;
     cursor: pointer;
     transition: 0.1s;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .friends_search-input button:hover {
@@ -128,6 +132,7 @@
     height: 90px;
     border-radius: 12px;
     z-index: 10;
+    object-fit: cover;
 }
 
 .friend-profile_t-block-buttons {
@@ -137,8 +142,8 @@
     gap: 18px;
 }
 
-.profile-picture {
-    object-fit: cover;
+.friend-profile_t-block-buttons img {
+    object-fit: contain !important;
 }
 
 .friend-profile_t-block-buttons__requests {
@@ -248,4 +253,33 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.not-found_message {
+    margin-top: 6%;
+}
+
+.cross_button {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+@media screen and (min-width: 1900px) {
+    .friends_top-bar .text h2 {
+        font-size: 44px;
+    }
+
+    .friend-profile_background img {
+        width: 100px;
+        height: 100px;
+        border-radius: 14px;
+    }
+
+    .friend-profile_background {
+        padding: 1%;
+    }
+
+    .friend-profile_text-block h3 {
+        font-size: 32px;
+    }
 }

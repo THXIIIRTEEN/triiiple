@@ -1,6 +1,11 @@
 "use client"
 
+//SERVER FUNCTIONS
+
 import { useStore } from "../authorization/data-utils/zustand-functions";
+
+//COMPONENTS
+
 import Header from "../components/Header/Header";
 import NewFriends from "../components/new-friends/NewFriends";
 import Messanger from "./Messanger";

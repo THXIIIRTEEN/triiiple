@@ -1,33 +1,44 @@
 "use client"
 
-import { useStore } from "@/app/authorization/data-utils/zustand-functions"
-import Styles from "./NewsBlock.module.css"
-import { useEffect, useRef, useState } from "react";
-import Comment from "../comment/Comment";
+//SERVER FUNCTIONS
+
+import { useStore } from "@/app/authorization/data-utils/zustand-functions";
 import { postUtils } from "../data-functions/postFunction";
-import { io } from "socket.io-client";
+
+//CLIENT FUNCTIONS
+
+import { deletePost, likeFunction, postNewComment, showComment } from "../news-client-functions/news-client-functions";
+import { formateDate } from "../news-client-functions/date-formatted";
+
+//STYLES
+
+import Styles from "./NewsBlock.module.css";
+
+//COMPONENTS
+
+import Comment from "../comment/Comment";
+
+//REACT IMPORTS
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link"
 
 export default function NewsBlock(props) {
-    const date_string = props.time;
-    const date = new Date(date_string);
-    const dateFormatted = {
-        day: date.getDate() < 10 ? `0${date.getDate()}` : date.getDate(),
-        month: date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth(),
-        year: date.getFullYear() < 10 ? `0${date.getFullYear()}` : date.getFullYear(),
-        hour: date.getHours() < 10 ? `0${date.getHours()}` : date.getHours(),
-        minutes: date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes(),
-    };
-    const dateToday = {
-        day: new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate(),
-        month: new Date().getMonth() < 10 ? `0${new Date().getMonth()}` : new Date().getMonth(),
-        year: new Date().getFullYear() < 10 ? `0${new Date().getFullYear()}` : new Date().getFullYear()
-    };
+
+    const [ dateFormatted, setDateFormatted ] = useState(new Date());
+    const [ dateToday, setDateToday ] = useState(new Date());
     const [ show, setShow ] = useState(false);
     const [ active, setActive ] = useState(false);
     const [ likes, setLikes ] = useState(props.likes);
     const [ commentError, setCommentError ] = useState(false);
     const [ post, setPost ] = useState(props);
+
+    const user = useStore().user;
+    const commentInput = useRef(null);
+
+    useEffect(() => {
+        formateDate(props, setDateFormatted, setDateToday)
+    }, [])
 
     useEffect(() => {
         if (props != null) {
@@ -35,36 +46,9 @@ export default function NewsBlock(props) {
         }
     }, [props])
 
-    const user = useStore().user;
-
-    const commentInput = useRef(null);
-
-    const id = user._id;
-    const postID = props._id;
-
-    const showComment = () => {
-        setShow(!show)
-    }
-
-    const postNewComment = async(event) => {
-        event.preventDefault();
-        if (commentInput.current.value === "") {
-            setCommentError(!commentError)
-        }
-        if (commentInput.current.value != "") {
-            const data = {
-                author: id,
-                time: new Date(),
-                text: commentInput.current.value
-            }
-            postUtils.postComment(postID, data);
-            commentInput.current.value = ""
-        }
-    }
-
     useEffect(() => {
         const getResult = async () => {
-            const result = await postUtils.checkLike(id, postID);
+            const result = await postUtils.checkLike(user._id, props._id);
             if (!result) {
                 setActive(false)
             }
@@ -73,25 +57,9 @@ export default function NewsBlock(props) {
                 setActive(true)
             }
         }
-        getResult(id)
+        getResult(user._id)
     }, []);
     
-    const likeFunction = async () => {
-        const result = await postUtils.like(id, postID);
-        setActive(result)
-        if (result) {
-            setLikes([...likes, user]); 
-        } else {
-            setLikes(likes.filter(like => like._id !== user._id)); 
-        }
-    };
-
-    const deletePost = async (event) => {
-        event.preventDefault();
-        await postUtils.deletePost(postID);
-        location.reload();
-    }
-
     if (user) {
         return (
             <div className={Styles["news-block_background"]}>
@@ -99,13 +67,15 @@ export default function NewsBlock(props) {
                     <div className={Styles["news-block_user"]}>
                         <div className={Styles['news-block_profile__background']}>                
                             <Link href={`/profile/${props.author.username}`}>
-                                <img src={post.author.profile}/>
+                                {   post.author.profile === null ?
+                                    <img src="/images/profile/profile_picture.png" alt="profile"/> :
+                                    <img src={post.author.profile}/>
+                                }
                             </Link>
                         </div>
         
                         <div className={Styles["new-block_top__user"]}>
                             <h6>{post.author.username}</h6>
-
                             { dateFormatted.day != dateToday.day && dateFormatted.day != dateToday.day - 1 &&
                                 `${dateFormatted.day}.${dateFormatted.month}.${dateFormatted.year}, ${dateFormatted.hour}:${dateFormatted.minutes}`            
                             }
@@ -118,7 +88,7 @@ export default function NewsBlock(props) {
                         </div>
                     </div>
                     { user.username === props.author.username &&
-                        <button className={Styles["delete-button"]} onClick={(event) => {deletePost(event)}}>
+                        <button className={Styles["delete-button"]} onClick={(event) => {deletePost(event, props)}}>
                             <img className={Styles["delete-button_image"]} src={"/images/new-block/trash_can.svg"}/>
                         </button>
                     }
@@ -141,44 +111,43 @@ export default function NewsBlock(props) {
                 }
     
                 <div className={Styles["new-block_buttons"]}>
-                    <button onClick={likeFunction}>
+                    <button onClick={() => {likeFunction(user, props, setActive, setLikes, likes)}}>
                         { active === false && 
                             <img src="/images/new-block/like_button.svg"/>
                         }
                         { active === true &&
                             <img src="/images/new-block/like_button_active.svg"/>
                         }
-
                     </button>
-                    {   likes.length > 0 &&
-                        <p className={Styles["comments_count"]}>{likes.length}</p>
-                    }
-                    <button onClick={showComment}>
+                        {   likes.length > 0 &&
+                            <p className={Styles["comments_count"]}>{likes.length}</p>
+                        }
+                    <button onClick={() => {showComment(setShow, show)}}>
                         <img src="/images/new-block/message_button.svg"/>
                     </button>
-                    {
-                        post.comments.length > 0 &&
-                        <p className={Styles["comments_count"]}>{post.comments.length}</p>
-                    }
-                </div>
-    
-                { show === true && 
-                    <div className={Styles["comment"]}>
-                        {post.comments.map((comment) => {
-                            return (
-                                <Comment {...comment} postID={postID} key={comment._id}/>
-                            )
-                        })
+                        {
+                            post.comments.length > 0 &&
+                            <p className={Styles["comments_count"]}>{post.comments.length}</p>
                         }
-                    </div>
-                }
-    
+                </div>
+                    { show === true && 
+                        <div className={Styles["comment"]}>
+                            {post.comments.map((comment) => {
+                                return (
+                                    <Comment {...comment} postID={props._id} key={comment._id}/>
+                                )
+                            })
+                            }
+                        </div>
+                    }
                 <div className={Styles["news-block_bottom"]}>
-                    <img src={user.profile}/>
-    
+                    {   user.profile === null ?
+                        <img src="/images/profile/profile_picture.png" alt="profile"/> :
+                        <img src={user.profile}/>
+                    }
                     <form className={`${Styles['comment-block']} ${commentError === true && Styles['comment-block_error']}`}>
                         <input ref={commentInput} placeholder="Написать комментарий"/>
-                        <button type="submit" onClick={(event) => postNewComment(event)}>
+                        <button type="submit" onClick={(event) => postNewComment(event, setCommentError, commentError, commentInput, user, props)}>
                             <img src="/images/new-block/send_button.svg"/>
                         </button>
                     </form>

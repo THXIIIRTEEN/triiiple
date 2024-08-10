@@ -66,6 +66,7 @@
     width: 52px;
     height: 52px;
     border-radius: 9px;
+    object-fit: cover;
 }
 
 .new-friends_block li a {
@@ -79,4 +80,25 @@
 
 .new-friends_block li a:hover {
     text-decoration: none;
+}
+
+@media screen and (min-width: 1900px) {
+    .new-friends_block {
+        width: 370px;
+        border-radius: 27px;
+    }
+
+    .new-friends_block h2 {
+        font-size: 27px;
+    }
+
+    .new-friends_block h3 {
+        font-size: 22px;
+    }
+
+    .new-friends_block li img {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+    }
 }

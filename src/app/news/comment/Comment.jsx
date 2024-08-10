@@ -1,32 +1,39 @@
-import Link from "next/link"
-import Styles from "./comment.module.css"
+//SERVER FUNCTIONS
+
 import { useStore } from "@/app/authorization/data-utils/zustand-functions";
-import { postUtils } from "../data-functions/postFunction";
+
+//CLIENT FUNCTIONS
+
+import { formateDate } from "../news-client-functions/date-formatted";
+import { deleteComment } from "../news-client-functions/news-client-functions";
+
+//STYLES
+
+import Styles from "./comment.module.css";
+
+//REACT IMPORTS
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Comment(props) {
-    const date_string = props.time;
-    const date = new Date(date_string);
-    const dateFormatted = {
-        day: date.getDate() < 10 ? `0${date.getDate()}` : date.getDate(),
-        month: date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth(),
-        year: date.getFullYear() < 10 ? `0${date.getFullYear()}` : date.getFullYear(),
-        hour: date.getHours() < 10 ? `0${date.getHours()}` : date.getHours(),
-        minutes: date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes(),
-    };
-    const dateToday = {
-        day: new Date().getDate() < 10 ? `0${new Date().getDate()}` : new Date().getDate(),
-        month: new Date().getMonth() < 10 ? `0${new Date().getMonth()}` : new Date().getMonth(),
-        year: new Date().getFullYear() < 10 ? `0${new Date().getFullYear()}` : new Date().getFullYear()
-    };
+
     const user = useStore().user;
-    const deleteComment = (event) => {
-        event.preventDefault();
-        postUtils.deleteComment(props.postID, props._id);
-    }
+    
+    const [ dateFormatted, setDateFormatted ] = useState(new Date());
+    const [ dateToday, setDateToday ] = useState(new Date());
+
+    useEffect(() => {
+        formateDate(props, setDateFormatted, setDateToday)
+    }, [])
+
     return (
         <div className={Styles["comment-block"]}>
             <Link href={`/profile/${props.author.username}`}>
-                <img src={props.author.profile}/>
+                {   props.author.profile === null ?
+                    <img src="/images/profile/profile_picture.png" alt="profile"/> :
+                    <img src={props.author.profile}/>
+                }
             </Link>
             <div className={Styles["text"]}>
                 <div className={Styles["text-top"]}>
@@ -45,7 +52,7 @@ export default function Comment(props) {
                         </p>
                     </div>
                     { user.username === props.author.username &&
-                        <button className={Styles["delete-button"]} onClick={(event) => {deleteComment(event)}}>
+                        <button className={Styles["delete-button"]} onClick={(event) => {deleteComment(event, props)}}>
                             <img className={Styles["delete-button_image"]} src={"/images/new-block/trash_can.svg"}/>
                         </button>
                     }

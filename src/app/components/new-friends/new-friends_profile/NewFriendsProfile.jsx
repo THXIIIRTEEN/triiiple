@@ -1,5 +1,6 @@
+//REACT IMPORTS
+
 import Link from "next/link"
-import Styles from "../NewFriends.module.css"
 import { useEffect, useState } from "react"
 
 export default function NewFriendsProfile(props) {
@@ -17,7 +18,10 @@ export default function NewFriendsProfile(props) {
     return (
         <li>
             <Link href={`http://localhost:3000/profile/${props.username}`}>
-                <img src={props.profile}/>
+                {   props.profile === null ?
+                    <img src="/images/profile/profile_picture.png" alt="profile"/> :
+                    <img src={props.profile}/>
+                }
                 <h3>{username}</h3>
                 <button>+</button>
             </Link>

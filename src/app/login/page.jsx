@@ -23,7 +23,6 @@ export default function LoginForm () {
         router: router,
         store: useStore()
     }
-
     return (
         <div className={Styles['login_block']}>
             <div className={Styles['greeting_block']}>

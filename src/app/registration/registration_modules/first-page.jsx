@@ -1,8 +1,14 @@
+//STYLES
+
 import "../../globals.css";
 import Styles from "../Registration.module.css";
+
+//CLIENT FUNCTIONS
+
 import { notEmptyCheck } from "@/app/authorization/correctFormFunctions/correctFormFunctions";
-import Link from "next/link";
 import { setObjectData } from "../registration_functions/registration_functions";
+
+//REACT IMPORTS
 
 export default function FirstPage(props) {
 
