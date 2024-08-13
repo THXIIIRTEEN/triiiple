@@ -1,8 +1,6 @@
 import { messagerUtils } from "@/app/messanger/messagerFunctions/messagerFunction";
 import { io } from "socket.io-client";
-const socket = io('https://triiiple.vercel.app', {
-    transports: ['websocket', 'polling']
-});
+const socket = io("http://localhost:3001");
 
 export const publishMessageFunction = async (event, newPostInput, setIsCorrect, isCorrect, chatId, user, fileInput) => {
     event.preventDefault();

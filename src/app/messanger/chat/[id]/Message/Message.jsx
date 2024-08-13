@@ -17,9 +17,7 @@ import Styles from "../../../Messanger.module.css"
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from "react";
 
-const socket = io('https://triiiple.vercel.app', {
-    transports: ['websocket', 'polling']
-});
+const socket = io("http://localhost:3001");
 
 export default function Message(props) {
     

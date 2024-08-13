@@ -29,9 +29,7 @@ export default function Messanger() {
     const [searchResult, setSearchResult] = useState(false);
     const [messageArray, setMessageArray] = useState(null);
 
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-    });
+    const socket = io("http://localhost:3001");
 
     useEffect(() => {
         socket.on('message sent', (data) => {

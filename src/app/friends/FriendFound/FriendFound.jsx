@@ -26,9 +26,8 @@ export default function FriendFound(props) {
     const [username, setUsername] = useState(data.username);
 
     const router = useRouter();
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-    });
+    const socket = io("http://localhost:3001");
+
     useEffect(() => {
         if (data.username.length > 8) {
             const maxLength = 10;

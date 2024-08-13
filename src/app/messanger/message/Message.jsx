@@ -26,9 +26,7 @@ export default function Message(props) {
     const [read, setRead] = useState(null);
     const [ dateToday, setDateToday ] = useState(new Date());
 
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-    });
+    const socket = io("http://localhost:3001");
 
     useEffect(() => {
         if (message) {

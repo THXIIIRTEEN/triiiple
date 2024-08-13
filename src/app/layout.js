@@ -26,9 +26,7 @@ export default function RootLayout({ children }) {
 
   const audioRef = useRef(null);
 
-  const socket = io('https://triiiple.vercel.app', {
-    transports: ['websocket', 'polling']
-});
+  const socket = io("http://localhost:3001");
 
   const user = useStore().user;
   const pathname = usePathname();

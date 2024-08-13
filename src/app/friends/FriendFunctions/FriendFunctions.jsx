@@ -2,9 +2,8 @@
 
 import { postServerFunction, deleteFunction, getFunction, postFunction } from "@/app/authorization/data-utils/data-functions"
 import { io } from "socket.io-client";
-const socket = io('https://triiiple.vercel.app', {
-    transports: ['websocket', 'polling']
-});
+const socket = io("http://localhost:3001");
+
 export const friendUtils = {
     sendFriendReq: async (userId, friendId) => {
         const result = await postServerFunction('/friends/request', {userId: userId, friendId: friendId});

@@ -28,9 +28,8 @@ export default function Header() {
     const [read, setRead] = useState(null);
     const [props, setProps] = useState(user);
 
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-    });
+    const socket = io("http://localhost:3001");
+
     const pathname = usePathname();
     const router = useRouter();
 

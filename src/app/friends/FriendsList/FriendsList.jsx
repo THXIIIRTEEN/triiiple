@@ -28,9 +28,7 @@ export default function FriendsList(props) {
     const [searchResult, setSearchResult] = useState(false)
 
     const searchInput = useRef(null);
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-    });
+    const socket = io("http://localhost:3001")
 
     useEffect(() => {
         setFriendsArray(props.friends)
