@@ -17,7 +17,7 @@ export default function NewFriendsProfile(props) {
 
     return (
         <li>
-            <Link href={`http://localhost:3000/profile/${props.username}`}>
+            <Link href={`/profile/${props.username}`}>
                 {   props.profile === null ?
                     <img src="/images/profile/profile_picture.png" alt="profile"/> :
                     <img src={props.profile}/>

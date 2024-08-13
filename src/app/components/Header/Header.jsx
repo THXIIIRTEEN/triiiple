@@ -28,7 +28,7 @@ export default function Header() {
     const [read, setRead] = useState(null);
     const [props, setProps] = useState(user);
 
-    const socket = io("http://localhost:3001");
+    const socket = io("https://triiiple-server.vercel.app/");
 
     const pathname = usePathname();
     const router = useRouter();

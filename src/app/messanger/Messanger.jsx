@@ -29,7 +29,7 @@ export default function Messanger() {
     const [searchResult, setSearchResult] = useState(false);
     const [messageArray, setMessageArray] = useState(null);
 
-    const socket = io("http://localhost:3001");
+    const socket = io("https://triiiple-server.vercel.app/");
 
     useEffect(() => {
         socket.on('message sent', (data) => {

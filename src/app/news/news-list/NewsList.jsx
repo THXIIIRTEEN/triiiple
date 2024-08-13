@@ -26,7 +26,7 @@ export default function NewsList() {
     const [sortedPosts, setSortedPosts] = useState(postArray)
 
     const user = useStore().user;
-    const socket = io("http://localhost:3001");
+    const socket = io("https://triiiple-server.vercel.app/");
 
     useEffect(() => {
         socket.on('comment updated', (data) => {

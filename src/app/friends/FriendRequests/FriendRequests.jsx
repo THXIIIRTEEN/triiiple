@@ -21,7 +21,7 @@ export default function FriendRequests(props) {
 
     const [reqArray, setReqArray] = useState(props.friend_requests);
 
-    const socket = io("http://localhost:3001");
+    const socket = io("https://triiiple-server.vercel.app/");
 
     useEffect(() => {
         setReqArray(props.friend_requests)

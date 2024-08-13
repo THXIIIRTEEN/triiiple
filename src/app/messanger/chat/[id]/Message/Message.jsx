@@ -17,7 +17,7 @@ import Styles from "../../../Messanger.module.css"
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from "react";
 
-const socket = io("http://localhost:3001");
+const socket = io("https://triiiple-server.vercel.app/");
 
 export default function Message(props) {
     
