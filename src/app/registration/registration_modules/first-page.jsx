@@ -8,7 +8,10 @@ import Styles from "../Registration.module.css";
 import { notEmptyCheck } from "@/app/authorization/correctFormFunctions/correctFormFunctions";
 import { setObjectData } from "../registration_functions/registration_functions";
 
+
 //REACT IMPORTS
+
+import Link from "next/link";
 
 export default function FirstPage(props) {
 
