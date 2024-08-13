@@ -21,9 +21,7 @@ export default function FriendRequests(props) {
 
     const [reqArray, setReqArray] = useState(props.friend_requests);
 
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-      });
+    const socket = io("https://triiiple-server.vercel.app");
 
     useEffect(() => {
         setReqArray(props.friend_requests)

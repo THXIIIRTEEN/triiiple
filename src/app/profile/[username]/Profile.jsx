@@ -31,9 +31,7 @@ export default function Profile( {props} ) {
     const [requestSent, setRequestSent] = useState(false);
 
     const user = useStore().user;
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-    });
+    const socket = io("https://triiiple-server.vercel.app");
 
     const router = useRouter();
 

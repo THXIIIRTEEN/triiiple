@@ -35,10 +35,8 @@ export default function Chat() {
 
     const chatId = location.pathname.split('/').pop();
 
-    const socket = io('https://triiiple.vercel.app', {
-        transports: ['websocket', 'polling']
-      });
-      
+    const socket = io("https://triiiple-server.vercel.app");
+
     const router = useRouter();
 
     const messageList = useRef(null);

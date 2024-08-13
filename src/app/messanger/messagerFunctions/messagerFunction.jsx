@@ -2,9 +2,7 @@
 
 import { postServerFunction, postFunction, deleteFunction } from "@/app/authorization/data-utils/data-functions";
 import { io } from "socket.io-client";
-const socket = io('https://triiiple.vercel.app', {
-    transports: ['websocket', 'polling']
-});
+const socket = io("https://triiiple-server.vercel.app");
 
 export const messagerUtils = {
     createChat: async (userId, friendId) => {
