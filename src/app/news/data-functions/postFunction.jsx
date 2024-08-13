@@ -2,7 +2,9 @@
 
 import { postServerFunction, deleteFunction, postFunction } from "@/app/authorization/data-utils/data-functions"
 import { io } from "socket.io-client";
-const socket = io("https://triiiple-server.vercel.app");
+const socket = io('https://triiiple.vercel.app', {
+    transports: ['websocket', 'polling']
+});
 
 export const postUtils = {
     like: async (id, postID) => {
