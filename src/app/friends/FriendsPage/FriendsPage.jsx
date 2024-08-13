@@ -25,7 +25,9 @@ export default function FriendsPage() {
     const [showFriendReq, setShowFriendReq] = useState(false);
     const [props, setProps] = useState(user);
 
-    const socket = io("https://triiiple-server.vercel.app/");
+    const socket = io('https://triiiple.vercel.app', {
+        transports: ['websocket', 'polling']
+    });
 
     useEffect(() => {
         socket.on('friens updated', async (data) => {
