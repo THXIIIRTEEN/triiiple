@@ -1,6 +1,6 @@
 "use server"
 
-const serverUrl = "https://triiiple-server.vercel.app/";
+const serverUrl = "http://localhost:3001";
 
 export const postFunction = async (userData, endpoint) => {
     return await fetch(serverUrl + endpoint, {
