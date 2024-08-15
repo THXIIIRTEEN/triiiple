@@ -1,6 +1,6 @@
 "use server"
 
-const serverUrl = "http://localhost:3001";
+const serverUrl = "http://89.191.225.116";
 
 export const postFunction = async (userData, endpoint) => {
     return await fetch(serverUrl + endpoint, {

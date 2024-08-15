@@ -25,7 +25,7 @@ export default function FriendsPage() {
     const [showFriendReq, setShowFriendReq] = useState(false);
     const [props, setProps] = useState(user);
 
-    const socket = io("http://localhost:3001");
+    const socket = io("http://89.191.225.116");
 
     useEffect(() => {
         socket.on('friens updated', async (data) => {

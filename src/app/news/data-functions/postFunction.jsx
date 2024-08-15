@@ -2,7 +2,7 @@
 
 import { postServerFunction, deleteFunction, postFunction } from "@/app/authorization/data-utils/data-functions"
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3001");
+const socket = io("http://89.191.225.116");
 
 export const postUtils = {
     like: async (id, postID) => {

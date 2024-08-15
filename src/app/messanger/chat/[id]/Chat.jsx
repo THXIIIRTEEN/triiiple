@@ -35,7 +35,7 @@ export default function Chat() {
 
     const chatId = location.pathname.split('/').pop();
 
-    const socket = io("http://localhost:3001");
+    const socket = io("http://89.191.225.116");
     const router = useRouter();
 
     const messageList = useRef(null);

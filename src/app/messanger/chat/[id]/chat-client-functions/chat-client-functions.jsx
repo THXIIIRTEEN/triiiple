@@ -1,6 +1,6 @@
 import { messagerUtils } from "@/app/messanger/messagerFunctions/messagerFunction";
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3001");
+const socket = io("http://89.191.225.116");
 
 export const publishMessageFunction = async (event, newPostInput, setIsCorrect, isCorrect, chatId, user, fileInput) => {
     event.preventDefault();

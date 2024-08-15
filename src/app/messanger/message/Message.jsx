@@ -26,7 +26,7 @@ export default function Message(props) {
     const [read, setRead] = useState(null);
     const [ dateToday, setDateToday ] = useState(new Date());
 
-    const socket = io("http://localhost:3001");
+    const socket = io("http://89.191.225.116");
 
     useEffect(() => {
         if (message) {

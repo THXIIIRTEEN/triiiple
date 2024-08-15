@@ -31,7 +31,7 @@ export default function Profile( {props} ) {
     const [requestSent, setRequestSent] = useState(false);
 
     const user = useStore().user;
-    const socket = io("http://localhost:3001");
+    const socket = io("http://89.191.225.116");
 
     const router = useRouter();
 

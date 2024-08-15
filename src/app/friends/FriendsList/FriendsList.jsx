@@ -28,7 +28,7 @@ export default function FriendsList(props) {
     const [searchResult, setSearchResult] = useState(false)
 
     const searchInput = useRef(null);
-    const socket = io("http://localhost:3001")
+    const socket = io("http://89.191.225.116")
 
     useEffect(() => {
         setFriendsArray(props.friends)

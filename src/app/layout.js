@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
 
   const audioRef = useRef(null);
 
-  const socket = io("http://localhost:3001");
+  const socket = io("http://89.191.225.116");
 
   const user = useStore().user;
   const pathname = usePathname();
