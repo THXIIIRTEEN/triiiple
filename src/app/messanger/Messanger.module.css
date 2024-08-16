@@ -262,6 +262,7 @@
     overflow: auto;
     height: 60vh;
     margin-bottom: 2%;
+    scrollbar-width: none;
 }
 
 .message-block {
