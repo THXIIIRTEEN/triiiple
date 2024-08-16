@@ -37,13 +37,23 @@ export default function Profile( {props} ) {
 
     useEffect(() => {
         socket.on('comment updated', (data) => {
-            setPostArray(data)
+            const newPostArray = data.filter((post) => post.author._id === props._id);
+            setPostArray(newPostArray)
         })
 
         return () => {
             socket.off('comment updated', {});
         };
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        socket.on('friens updated', async (data) => {
+            location.reload();
+        })    
+        return () => {
+            socket.off('friens updated', {});
+        };
+    });
 
     useEffect(() => {
         if (postArray) {
@@ -85,10 +95,10 @@ export default function Profile( {props} ) {
                         <p>{props.about_user}</p>
                         {   props.username != user.username &&
                             <div className={Styles['button-section']}>
-                                {   requestSent === false && user.friend_requests.find((req) => req._id === props._id) === undefined && user.friends.find((friend) => friend._id === props._id) === undefined &&
+                                {   props.friend_requests.find((req) => req === user._id) === undefined && user.friend_requests.find((req) => req._id === props._id) === undefined && user.friends.find((friend) => friend._id === props._id) === undefined &&
                                     <button onClick={() => {sendFriendReq(setRequestSent, requestSent, user, props)}} className={Styles['add-button']}>Добавить в друзья</button>
                                 }
-                                {   requestSent === true && user.friend_requests.find((req) => req._id === props._id) === undefined && user.friends.find((friend) => friend._id === props._id) === undefined &&
+                                {   props.friend_requests.find((req) => req === user._id) && user.friends.find((friend) => friend._id === props._id) === undefined &&
                                     <button onClick={() => {cancelFriendReq(setRequestSent, requestSent, user, props)}} className={Styles['add-button']}>Отменить запрос</button>
                                 }
                                 {   user.friend_requests.find((req) => req._id === props._id) != undefined &&
@@ -139,6 +149,37 @@ export default function Profile( {props} ) {
                                     )
                                 })}
                             </div> 
+                        }
+                    </div>      
+                }
+                {   postArray &&
+                    postArray.length === 0 &&
+                        <div className = {Styles['news-list_block']}>
+                        { props.username != user.username &&
+                            <h1>Посты {props.username}</h1>
+                        }
+                        { props.username === user.username &&
+                            <>
+                                <h1>Что у вас нового?</h1>
+                                <p>
+                                    Поделитесь с окружающими своими мыслями, жизненным
+                                    опытом и впечатлениями.
+                                </p>
+                                <form className={isCorrect === false ? `error-input ${Styles['news-list_input']} ${Styles['error-input']}` : Styles['news-list_input']}>
+                                    <input required type="text" ref={newPostInput} id="text" placeholder={`О чём думаете ${user.username}?`}/>
+
+                                    <div className={Styles['news-list_input__buttons']}>
+                                        <div className={Styles['first-button']}>
+                                            <input id="file_input" name="postPicture" type="file" ref={fileInput} placeholder="" className={Styles['news-list_file-input']}/>
+                                        </div>
+
+                                        <button id="publish" type="submit" onClick={() => {publishFunction(event, newPostInput, fileInput, setIsCorrect, isCorrect, user)}} className={Styles['second-button']}>Опубликовать</button>
+                                    </div>
+                                </form>
+                            </>
+                        }
+                        { isCorrect === false && 
+                        <p className={Styles["error-text"]}>Кажется, вы ничего не написали</p>
                         }
                     </div>      
                 }

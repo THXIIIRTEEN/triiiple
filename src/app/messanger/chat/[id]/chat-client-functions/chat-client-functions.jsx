@@ -31,6 +31,7 @@ export const publishMessageFunction = async (event, newPostInput, setIsCorrect, 
         const chatID = location.pathname.split('/').pop();
         socket.emit('send notification', {mes, chatID})
         socket.emit('send message', {});
-        newPostInput.current.value = ""
+        newPostInput.current.value = "";
+        fileInput.current.value = "";
     }
 }

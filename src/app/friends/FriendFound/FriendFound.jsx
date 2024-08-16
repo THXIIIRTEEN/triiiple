@@ -58,7 +58,7 @@ export default function FriendFound(props) {
             if (data.friend_requests.find((req) => req === user._id)) {
                 setRequestSent(true)
             }
-    }, [])
+    }, [props])
 
     return (
         <div className={Styles['friend-profile_background']}>
@@ -77,18 +77,18 @@ export default function FriendFound(props) {
                         <button onClick={() => {copyProfileLink(data)}}>
                             <img src="/images/friends/copy-link.svg"/>
                         </button>
-                        {    requestSent === false && user.friends.find((req) => req._id === data._id) === undefined &&
+                        {    user.friend_requests.find((req) => req._id === data._id) === undefined && data.friend_requests.find((req) => req._id === user._id) === undefined && user.friends.find((req) => req._id === data._id) === undefined &&
                             <button onClick={(event) => {sendFriendReq(event, setRequestSent, user, data)}}>
                                 <img src="/images/friends/add-friend.svg"/>
                             </button>
                         }
-                        {   requestSent === true && user.friends.find((req) => req._id === data._id) === undefined &&
+                        {   data.friend_requests.find((req) => req._id === user._id) && user.friends.find((req) => req._id === data._id) === undefined &&
                             <button onClick={(event) => {cancelFriendReq(event, setRequestSent, user, data)}}>
                                 <img src="/images/friends/hourglass.svg"/>
                             </button>
                         }
                         {   user.friends.find((req) => req._id === data._id) &&
-                            <button onClick={() => {deleteFriend(user, friend)}}>
+                            <button onClick={() => {deleteFriend(user, data)}}>
                                 <img src="/images/friends/unfriend.svg"/>
                             </button>
                         }

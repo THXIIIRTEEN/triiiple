@@ -1,5 +1,9 @@
 "use client"
 
+//CLIENT FUNCTIONS
+
+import { friendUtils } from "../FriendFunctions/FriendFunctions";
+
 //SERVER FUNCTIONS
 
 import { useStore } from "@/app/authorization/data-utils/zustand-functions";
@@ -26,6 +30,14 @@ export default function FriendsPage() {
     const [props, setProps] = useState(user);
 
     const socket = io("https://api.triiiple.ru");
+
+    useEffect(() => {
+        const updateProps = async () => {
+            const newProps = await friendUtils.findMyselfById(user._id);
+            setProps(newProps)
+        }
+        updateProps();
+    });
 
     useEffect(() => {
         socket.on('friens updated', async (data) => {

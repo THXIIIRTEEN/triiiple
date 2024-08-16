@@ -13,6 +13,7 @@ export const friendUtils = {
     cancelFriendReq: async (userId, friendId) => {
         const result = await deleteFunction('/friends/request', {userId: userId, friendId: friendId});
         socket.emit('update friends', {});
+        location.reload();
         return result;
     },
     acceptReq: async (userId, friendId) => {
@@ -37,6 +38,10 @@ export const friendUtils = {
     },
     findUserByUsername: async (username) => {
         const result = await postServerFunction('/friends/find', {username: username});
+        return result
+    },
+    findMyselfById: async (id) => {
+        const result = await postServerFunction('/userByID', {id: id});
         return result
     }
 }
