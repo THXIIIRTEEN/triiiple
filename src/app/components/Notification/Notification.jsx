@@ -29,7 +29,10 @@ export default function Notification({data, chatId, setNotification}) {
             <Link href={`/messanger/chat/${chatId}`}>
                 <div>
                     <img className="new-message_marker" src="/images/messanger/new.svg"/>
-                    <img className='new-message_profile' src={data.author.profile}/>
+                    {   data.author.profile === null ?
+                        <img className='new-message_profile' src="/images/profile/profile_picture.png" alt="profile"/> :
+                        <img className='new-message_profile' src={data.author.profile} alt="profile"/>
+                    }
                 </div>
                 <div className="new-message_text">
                     <h2>{data.author.username}</h2>
