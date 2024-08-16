@@ -22,7 +22,7 @@ export const declineReq = async (user, friend) => {
 };
 
 export const copyProfileLink = (friend) => {
-    const url = `http://89.191.225.116/profile/${friend.username}`;
+    const url = `https://triiiple.ru/profile/${friend.username}`;
     navigator.clipboard.writeText(url)
 };
 

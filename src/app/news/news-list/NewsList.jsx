@@ -26,7 +26,7 @@ export default function NewsList() {
     const [sortedPosts, setSortedPosts] = useState(postArray)
 
     const user = useStore().user;
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     useEffect(() => {
         socket.on('comment updated', (data) => {

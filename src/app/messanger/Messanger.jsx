@@ -29,7 +29,7 @@ export default function Messanger() {
     const [searchResult, setSearchResult] = useState(false);
     const [messageArray, setMessageArray] = useState(null);
 
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     useEffect(() => {
         socket.on('message sent', (data) => {

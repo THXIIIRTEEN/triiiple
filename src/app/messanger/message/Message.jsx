@@ -26,7 +26,7 @@ export default function Message(props) {
     const [read, setRead] = useState(null);
     const [ dateToday, setDateToday ] = useState(new Date());
 
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     useEffect(() => {
         if (message) {

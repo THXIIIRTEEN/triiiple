@@ -31,7 +31,7 @@ export default function Profile( {props} ) {
     const [requestSent, setRequestSent] = useState(false);
 
     const user = useStore().user;
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     const router = useRouter();
 

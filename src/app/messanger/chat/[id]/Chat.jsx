@@ -35,7 +35,7 @@ export default function Chat() {
 
     const chatId = location.pathname.split('/').pop();
 
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
     const router = useRouter();
 
     const messageList = useRef(null);

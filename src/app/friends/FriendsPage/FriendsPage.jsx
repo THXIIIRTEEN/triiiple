@@ -25,7 +25,7 @@ export default function FriendsPage() {
     const [showFriendReq, setShowFriendReq] = useState(false);
     const [props, setProps] = useState(user);
 
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     useEffect(() => {
         socket.on('friens updated', async (data) => {

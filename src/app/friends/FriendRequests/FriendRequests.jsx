@@ -21,7 +21,7 @@ export default function FriendRequests(props) {
 
     const [reqArray, setReqArray] = useState(props.friend_requests);
 
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     useEffect(() => {
         setReqArray(props.friend_requests)

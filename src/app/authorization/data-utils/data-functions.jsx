@@ -1,6 +1,6 @@
 "use server"
 
-const serverUrl = "http://89.191.225.116";
+const serverUrl = "https://api.triiiple.ru";
 
 export const postFunction = async (userData, endpoint) => {
     return await fetch(serverUrl + endpoint, {

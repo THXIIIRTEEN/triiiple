@@ -1,6 +1,6 @@
 import { messagerUtils } from "@/app/messanger/messagerFunctions/messagerFunction";
 import { io } from "socket.io-client";
-const socket = io("http://89.191.225.116");
+const socket = io("https://api.triiiple.ru");
 
 export const publishMessageFunction = async (event, newPostInput, setIsCorrect, isCorrect, chatId, user, fileInput) => {
     event.preventDefault();

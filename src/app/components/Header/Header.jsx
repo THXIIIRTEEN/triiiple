@@ -28,7 +28,7 @@ export default function Header() {
     const [read, setRead] = useState(null);
     const [props, setProps] = useState(user);
 
-    const socket = io("http://89.191.225.116");
+    const socket = io("https://api.triiiple.ru");
 
     const pathname = usePathname();
     const router = useRouter();
