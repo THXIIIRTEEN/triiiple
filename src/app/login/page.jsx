@@ -13,6 +13,8 @@ import { getJWT } from "../authorization/data-utils/jwt-functions";
 
 export default function LoginForm () {
 
+    const user = useStore().user
+
     const [isCorrect, setIsCorrect] = useState(false);
     const [isUserDontExist, setUserDontExist] = useState(false);
 
