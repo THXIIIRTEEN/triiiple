@@ -33,6 +33,10 @@ export default function RootLayout({ children }) {
   const store = useStore();
 
   useEffect(() => {
+    document.title = 'triiiple';
+  }, []);
+
+  useEffect(() => {
     socket.on('notification sent', async (data) => {
         const chat = await postServerFunction('/messanger/getChatsById', {chatId: data.chatID})
         if (user && data.mes.author && chat.authors.find((author) => author._id === user._id && author._id != data.mes.author._id)) {

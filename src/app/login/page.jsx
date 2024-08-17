@@ -23,6 +23,14 @@ export default function LoginForm () {
         router: router,
         store: useStore()
     }
+
+    useEffect(() => {
+        const jwt = getJWT();
+        if (jwt && user) {
+            router.push(`/profile/${user.username}`)
+        }
+    }, [user])
+    
     return (
         <div className={Styles['login_block']}>
             <div className={Styles['greeting_block']}>
