@@ -102,7 +102,7 @@ export const updateUsername = async (event, user, usernameInput, setInvalidUsern
 
     if (usernameInput.current.value.length >= 4) {
         if (regex.test(document.getElementById('username').value)) {
-            document.getElementById('username').classList.add('error-input')
+            usernameInputBlock.classList.add('error-input')
             setUsernameError(true);
         } else {
             setUsernameError(false);
@@ -110,7 +110,6 @@ export const updateUsername = async (event, user, usernameInput, setInvalidUsern
                 id: user._id,
                 username: usernameInput.current.value
             }
-    
             const result = await settingsUtils.updateUsername(data);
             if (!result) {
                 setUsernameExist(true)
