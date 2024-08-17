@@ -33,7 +33,7 @@ export default function Settings() {
     const [incorrectPassword, setIncorrectPassword] = useState(false);
     const [invalidPasswordLength, setInvalidPasswordLength] = useState(false);
     const [invalidUsernameLength, setInvalidUsernameLength] = useState(false);
-
+    const [usernameError, setUsernameError] = useState(false);
 
     const newPassword = useRef(null);
     const newPasswordAgain = useRef(null);
@@ -84,7 +84,7 @@ export default function Settings() {
                         <form ref={usernameInputBlock} className={Styles['username_input']}>
                             <input ref={usernameInput} placeholder={user.username}/>
 
-                            <button onClick={(event) => {updateUsername(event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist)}}>
+                            <button onClick={(event) => {updateUsername(event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist, setUsernameError)}}>
                                 <img src="/images/new-block/send_button.svg"/>
                             </button>
                         </form>
@@ -95,6 +95,11 @@ export default function Settings() {
                     {   invalidUsernameLength === true &&
                         <p className={Styles['error-message']}>Имя пользователя должно быть больше 3 символов</p>
                     }
+
+                    { usernameError === true &&
+                    (<p className="error-message">В имени пользователя должны быть только латинские символы</p>)
+                    }
+                    
                     <div className={Styles['settings_block_category-name']}>
                         <h2 onClick={() => {showAboutUserFunction(setShowAboutUser, showAboutUser)}}>Обо мне</h2>
                         <button onClick={() => {showAboutUserFunction(setShowAboutUser, showAboutUser)}}>

@@ -90,7 +90,7 @@ export const updateProfilePicture = (event, user, setIncorrectFile, imageInputBL
     }           
 }
 
-export const updateUsername = async (event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist) => {
+export const updateUsername = async (event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist, setUsernameError) => {
     event.preventDefault();
 
     if (usernameInput.current.value.length < 4) {
@@ -98,21 +98,30 @@ export const updateUsername = async (event, user, usernameInput, setInvalidUsern
         usernameInputBlock.current.classList.add('error-input')
     }
 
+    const regex = /[а-яА-ЯёЁ]/g;
+
     if (usernameInput.current.value.length >= 4) {
-        const data = {
-            id: user._id,
-            username: usernameInput.current.value
-        }
-
-        const result = await settingsUtils.updateUsername(data);
-        if (!result) {
-            setUsernameExist(true)
-            usernameInputBlock.current.classList.add('error-input')
-        }
-
-        if (result) {
-            location.reload();
-        }
+        if (regex.test(document.getElementById('username').value)) {
+            document.getElementById('username').classList.add('error-input')
+            setUsernameError(true);
+        } else {
+            setUsernameError(false);
+            const data = {
+                id: user._id,
+                username: usernameInput.current.value
+            }
+    
+            const result = await settingsUtils.updateUsername(data);
+            if (!result) {
+                setUsernameExist(true)
+                usernameInputBlock.current.classList.add('error-input')
+            }
+    
+            if (result) {
+                location.reload();
+            }
+        }    
+        
     }
 }
 
