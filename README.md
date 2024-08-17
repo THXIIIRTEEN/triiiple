@@ -14,11 +14,11 @@ MVP проект клиентское приложения мессенджер�
 </ul>
 <h2>Используемые технологии</h2>
 <ul>
-  <li>HTML</li>
   <li>CSS</li>
-  <li>Next JS / React JS</li>
-  <li>JavaScript</li>
   <li>JWT</li>
+  <li>HTML</li>
+  <li>JavaScript</li>
+  <li>Next JS / React JS</li>
   <li>Websocket / Socket.io</li>
 </ul>
 <br>
