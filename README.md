@@ -16,8 +16,10 @@ MVP проект клиентское приложения мессенджер�
 <ul>
   <li>HTML</li>
   <li>CSS</li>
-  <li>React JS</li>
+  <li>Next JS / React JS</li>
   <li>JavaScript</li>
+  <li>JWT</li>
+  <li>Websocket / Socket.io</li>
 </ul>
 <br>
 <h2>Планы на будущее</h2>
