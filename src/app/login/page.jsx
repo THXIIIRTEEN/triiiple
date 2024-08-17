@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import Styles from "./LoginForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { notEmptyCheck } from "../authorization/correctFormFunctions/correctFormFunctions";
 import { checkUserData } from "./login_functions/login_functions";
 
 import { useRouter } from "next/navigation";
 import { useStore } from "../authorization/data-utils/zustand-functions";
+import { getJWT } from "../authorization/data-utils/jwt-functions";
 
 export default function LoginForm () {
 
@@ -30,7 +31,7 @@ export default function LoginForm () {
             router.push(`/profile/${user.username}`)
         }
     }, [user])
-    
+
     return (
         <div className={Styles['login_block']}>
             <div className={Styles['greeting_block']}>
