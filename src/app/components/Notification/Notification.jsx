@@ -9,6 +9,8 @@ import { useEffect } from "react";
 
 export default function Notification({data, chatId, setNotification}) {
 
+    const [text, setText] = useState(data.text)
+
     const closeFunction = () => {
         setNotification(null)
     }
@@ -22,6 +24,14 @@ export default function Notification({data, chatId, setNotification}) {
             setNotification(null);
         }, 10000); 
         return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        if (text.length > 30) {
+            const maxLength = 27;
+            const str = text;
+            setText(str.slice(0, maxLength - 3) + '...')
+        }
     }, [])
 
     return (
@@ -36,7 +46,7 @@ export default function Notification({data, chatId, setNotification}) {
                 </div>
                 <div className="new-message_text">
                     <h2>{data.author.username}</h2>
-                    <p>{data.text}</p>
+                    <p>{text}</p>
                 </div>
             </Link>
             <button onClick={() => (closeFunction())} className="new-message_close-button">
