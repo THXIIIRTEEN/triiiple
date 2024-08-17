@@ -15,7 +15,7 @@ import Link from "next/link";
 
 export default function FirstPage(props) {
 
-    const {isIdentical, isUserExist, PasswordLengthError, UsernameLengthError} = props;
+    const {isIdentical, isUserExist, PasswordLengthError, UsernameLengthError, usernameError} = props;
 
     return (
         <>
@@ -31,8 +31,12 @@ export default function FirstPage(props) {
                     (<p className="error-message">Длина имени пользователя должна быть не менее 4 символов</p>)
                 }
 
+                { usernameError === true &&
+                    (<p className="error-message">В имени пользователя должны быть только латинские символы</p>)
+                }
+
                 <label htmlFor="password" className={Styles['form_label']}>Пароль</label>
-                <input id="password" onChange={notEmptyCheck} maxLength={12} required autoComplete="off" type="password" className={Styles['form_input']} placeholder="Придумайте пароль"/>
+                <input id="password" onChange={notEmptyCheck} maxLength={16} required autoComplete="off" type="password" className={Styles['form_input']} placeholder="Придумайте пароль"/>
                 <input id="second-password" onChange={notEmptyCheck} required autoComplete="off" type="password" className={Styles['form_input']} style={{marginTop: '1%', marginBottom: '1%'}} placeholder="Повторите пароль"/>
                 { isIdentical === false &&
                     (<p className="error-message">Пароли не совпадают</p>)
