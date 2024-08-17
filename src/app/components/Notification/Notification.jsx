@@ -5,7 +5,7 @@ import "../../globals.css";
 //REACT IMPORTS
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Notification({data, chatId, setNotification}) {
 
@@ -27,8 +27,8 @@ export default function Notification({data, chatId, setNotification}) {
     }, []);
 
     useEffect(() => {
-        if (text.length > 30) {
-            const maxLength = 27;
+        if (text.length > 25) {
+            const maxLength = 22;
             const str = text;
             setText(str.slice(0, maxLength - 3) + '...')
         }

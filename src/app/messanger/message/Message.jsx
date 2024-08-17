@@ -25,8 +25,9 @@ export default function Message(props) {
     const [time, setTime] = useState(null);
     const [read, setRead] = useState(null);
     const [ dateToday, setDateToday ] = useState(new Date());
+    const [lastMessage, setLastMessage] = useState(message.messages[message.messages.length-1].text)
 
-    const socket = io("https://api.triiiple.ru");
+    const socket = io("http://localhost:3001");
 
     useEffect(() => {
         if (message) {
@@ -58,6 +59,16 @@ export default function Message(props) {
         }
     }, [message])
 
+    useEffect(() => {
+        const lastMsg = message.messages[message.messages.length - 1]?.text || "";
+        if (lastMsg.length > 35) {
+            const maxLength = 32;
+            setLastMessage(lastMsg.slice(0, maxLength - 3) + '...');
+        } else {
+            setLastMessage(lastMsg);
+        }
+    }, [message.messages[message.messages.length - 1]?.text]);
+
    if (friend) {
     return (
         <Link className="message" href={`messanger/chat/${message._id}`}>
@@ -72,7 +83,7 @@ export default function Message(props) {
                         <h3>{friend.username}</h3>
 
                         { message.messages[message.messages.length-1] != undefined && message.messages[message.messages.length-1].author.username === user.username && message.messages[message.messages.length-1].text != "" &&
-                            <p>{`Вы: ${message.messages[message.messages.length-1].text}`}</p>
+                            <p>{`Вы: ${lastMessage}`}</p>
                         }
 
                         { message.messages[message.messages.length-1] != undefined && message.messages[message.messages.length-1].author.username === user.username && message.messages[message.messages.length-1].text == "" &&
@@ -80,7 +91,7 @@ export default function Message(props) {
                         }
 
                         { message.messages[message.messages.length-1] != undefined && message.messages[message.messages.length-1].author.username != user.username &&
-                            <p>{message.messages[message.messages.length-1].text}</p>
+                            <p>{lastMessage}</p>
                         }
 
                         { message.messages[message.messages.length-1] === undefined &&

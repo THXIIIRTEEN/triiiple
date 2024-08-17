@@ -98,11 +98,11 @@ export const updateUsername = async (event, user, usernameInput, setInvalidUsern
         usernameInputBlock.current.classList.add('error-input')
     }
 
-    const regex = /[а-яА-ЯёЁ]/g;
-
     if (usernameInput.current.value.length >= 4) {
-        if (regex.test(document.getElementById('username').value)) {
-            usernameInputBlock.classList.add('error-input')
+        const regex = /[а-яА-ЯёЁ]/g;
+
+        if (regex.test(usernameInput.current.value)) {
+            usernameInputBlock.current.classList.add('error-input')
             setUsernameError(true);
         } else {
             setUsernameError(false);

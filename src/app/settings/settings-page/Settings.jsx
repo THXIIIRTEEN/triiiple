@@ -97,9 +97,9 @@ export default function Settings() {
                     }
 
                     { usernameError === true &&
-                    (<p className="error-message">В имени пользователя должны быть только латинские символы</p>)
+                        <p className={Styles['error-message']}>В имени пользователя должны быть только латинские символы</p>
                     }
-                    
+
                     <div className={Styles['settings_block_category-name']}>
                         <h2 onClick={() => {showAboutUserFunction(setShowAboutUser, showAboutUser)}}>Обо мне</h2>
                         <button onClick={() => {showAboutUserFunction(setShowAboutUser, showAboutUser)}}>
