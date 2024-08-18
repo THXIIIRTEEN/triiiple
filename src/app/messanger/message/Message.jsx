@@ -27,7 +27,7 @@ export default function Message(props) {
     const [ dateToday, setDateToday ] = useState(new Date());
     const [lastMessage, setLastMessage] = useState(message.messages[message.messages.length-1].text)
 
-    const socket = io("http://localhost:3001");
+    const socket = io("https://api.triiiple.ru");
 
     useEffect(() => {
         if (message) {
