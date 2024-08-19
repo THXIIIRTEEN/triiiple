@@ -154,7 +154,7 @@ export default function NewsBlock(props) {
                         <img src={user.profile}/>
                     }
                     <form ref={commentForm} className={`${Styles['comment-block']} ${commentError === true && Styles['comment-block_error']}`}>
-                        <input ref={commentInput} placeholder="Написать комментарий"/>
+                        <input ref={commentInput} maxLength={200} placeholder="Написать комментарий"/>
                         <button type="submit" onClick={(event) => postNewComment(event, setCommentError, commentError, commentInput, user, props, setValidContent, validContent, commentForm)}>
                             <img src="/images/new-block/send_button.svg"/>
                         </button>

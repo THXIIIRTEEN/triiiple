@@ -163,7 +163,7 @@ export default function Chat() {
                 </div>
 
                 <form className={Styles["message-input"]}>
-                        <input ref={newPostInput} placeholder="Отправить сообщение"/>
+                        <input ref={newPostInput} maxLength={200} placeholder="Отправить сообщение"/>
                         <div className={Styles["buttons"]}>
                             <div className={Styles['first-button']}>
                                 <input ref={fileInput} type="file" placeholder="" className={Styles['news-list_file-input']}/>
