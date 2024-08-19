@@ -253,6 +253,13 @@
     border: solid 2px #F23F42;
 }
 
+.new-block_top__user p {
+    font-size: 16px !important;
+    color: black;
+    font-weight: 400 !important;
+    display: inline;
+}
+
 @media screen and (min-width: 1900px) {
     .new-block_top__user h6 {
         font-size: 27px;

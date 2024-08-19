@@ -85,13 +85,13 @@ export default function NewsBlock(props) {
                         <div className={Styles["new-block_top__user"]}>
                             <h6>{post.author.username}</h6>
                             { dateFormatted.day != dateToday.day && dateFormatted.day != dateToday.day - 1 &&
-                                `${dateFormatted.day}.${dateFormatted.month}.${dateFormatted.year}, ${dateFormatted.hour}:${dateFormatted.minutes}`            
+                                <p>{dateFormatted.day}.{dateFormatted.month}.{dateFormatted.year}, {dateFormatted.hour}:{dateFormatted.minutes}</p>          
                             }
                             {dateFormatted.day === dateToday.day - 1 && dateFormatted.month === dateToday.month && dateFormatted.year === dateToday.year &&
-                                `Вчера, ${dateFormatted.hour}:${dateFormatted.minutes}`
+                                <p>Вчера, {dateFormatted.hour}:{dateFormatted.minutes}</p>
                             }
                             { dateFormatted.day === dateToday.day && dateFormatted.month === dateToday.month && dateFormatted.year === dateToday.year &&
-                                `Сегодня, ${dateFormatted.hour}:${dateFormatted.minutes}`
+                                <p>Сегодня, {dateFormatted.hour}:{dateFormatted.minutes}</p>
                             }
                         </div>
                     </div>

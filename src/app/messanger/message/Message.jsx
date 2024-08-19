@@ -25,7 +25,7 @@ export default function Message(props) {
     const [time, setTime] = useState(null);
     const [read, setRead] = useState(null);
     const [ dateToday, setDateToday ] = useState(new Date());
-    const [lastMessage, setLastMessage] = useState(message.messages[message.messages.length-1].text)
+    const [lastMessage, setLastMessage] = useState(message.messages[message.messages.length-1]?.text)
 
     const socket = io("https://api.triiiple.ru");
 
