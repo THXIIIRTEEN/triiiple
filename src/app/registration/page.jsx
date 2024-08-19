@@ -24,6 +24,7 @@ export default function RegistrationForm() {
     const [PasswordLengthError, setPasswordLengthError] = useState(false);
     const [UsernameLengthError, setUsernameLengthError] = useState(false);
     const [usernameError, setUsernameError] = useState(false);
+    const [validContent, setValidContent] = useState(true)
 
     const userData = useMemo(() => {
         return {
@@ -44,6 +45,7 @@ export default function RegistrationForm() {
         setPasswordLengthError: setPasswordLengthError,
         setUsernameLengthError: setUsernameLengthError,
         setUsernameError: setUsernameError,
+        setValidContent: setValidContent
     }
 
     return (      
@@ -55,10 +57,10 @@ export default function RegistrationForm() {
             
             <form className={Styles['login_form']} encType={"multipart/form-data"}>
                 { secondPage == false && (
-                    <FirstPage isIdentical = {isIdentical} isUserExist = {isUserExist} PasswordLengthError = {PasswordLengthError} UsernameLengthError = {UsernameLengthError} usernameError = {usernameError} options = {options}/>
+                    <FirstPage isIdentical = {isIdentical} isUserExist = {isUserExist} PasswordLengthError = {PasswordLengthError} UsernameLengthError = {UsernameLengthError} usernameError = {usernameError} validContent = {validContent} options = {options}/>
                  ) } 
                 { secondPage == true && ( 
-                    <SecondPage isIdentical = {isIdentical} isUserExist = {isUserExist} options = {options}/>
+                    <SecondPage isIdentical = {isIdentical} isUserExist = {isUserExist} validContent = {validContent} options = {options}/>
                  ) }  
             </form>
         </div>

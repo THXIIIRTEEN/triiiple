@@ -32,9 +32,11 @@ export default function NewsBlock(props) {
     const [ likes, setLikes ] = useState(props.likes);
     const [ commentError, setCommentError ] = useState(false);
     const [ post, setPost ] = useState(props);
+    const [ validContent, setValidContent ] = useState(true)
 
     const user = useStore().user;
     const commentInput = useRef(null);
+    const commentForm = useRef(null);
 
     useEffect(() => {
         formateDate(props, setDateFormatted, setDateToday)
@@ -59,6 +61,12 @@ export default function NewsBlock(props) {
         }
         getResult(user._id)
     }, []);
+
+    useEffect(() => {
+        if (validContent === false) {
+            commentForm.current.classList.add('error-block')
+        }
+    }, [validContent])
     
     if (user) {
         return (
@@ -145,13 +153,18 @@ export default function NewsBlock(props) {
                         <img src="/images/profile/profile_picture.png" alt="profile"/> :
                         <img src={user.profile}/>
                     }
-                    <form className={`${Styles['comment-block']} ${commentError === true && Styles['comment-block_error']}`}>
+                    <form ref={commentForm} className={`${Styles['comment-block']} ${commentError === true && Styles['comment-block_error']}`}>
                         <input ref={commentInput} placeholder="Написать комментарий"/>
-                        <button type="submit" onClick={(event) => postNewComment(event, setCommentError, commentError, commentInput, user, props)}>
+                        <button type="submit" onClick={(event) => postNewComment(event, setCommentError, commentError, commentInput, user, props, setValidContent, validContent, commentForm)}>
                             <img src="/images/new-block/send_button.svg"/>
                         </button>
                     </form>
+
+                    
                 </div>
+                { validContent === false && 
+                    <p className={Styles['error-message']}>Кажется вы использовали в своём комментарии неприемлимые символы</p>
+                }
             </div>
         )
     }

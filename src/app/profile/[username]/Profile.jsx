@@ -29,9 +29,14 @@ export default function Profile( {props} ) {
     const [postArray, setPostArray] = useState(null);
     const [sortedPosts, setSortedPosts] = useState(postArray);
     const [requestSent, setRequestSent] = useState(false);
+    const [validContent, setValidContent] = useState(true)
 
     const user = useStore().user;
     const socket = io("https://api.triiiple.ru");
+
+    const newPostInput = useRef(null);
+    const fileInput = useRef(null);
+    const postForm = useRef(null);
 
     const router = useRouter();
 
@@ -70,10 +75,13 @@ export default function Profile( {props} ) {
             }
         }
         getPosts();
-    }, [props])
+    }, [props]);
 
-    const newPostInput = useRef(null);
-    const fileInput = useRef(null);
+    useEffect(() => {
+        if (validContent === false) {
+            postForm.current.classList.add('error-block')
+        }
+    }, [validContent])
 
     if (props) {
         return (
@@ -125,7 +133,7 @@ export default function Profile( {props} ) {
                                     Поделитесь с окружающими своими мыслями, жизненным
                                     опытом и впечатлениями.
                                 </p>
-                                <form className={isCorrect === false ? `error-input ${Styles['news-list_input']} ${Styles['error-input']}` : Styles['news-list_input']}>
+                                <form ref={postForm} className={isCorrect === false ? `error-input ${Styles['news-list_input']} ${Styles['error-input']}` : Styles['news-list_input']}>
                                     <input required type="text" ref={newPostInput} id="text" placeholder={`О чём думаете ${user.username}?`}/>
 
                                     <div className={Styles['news-list_input__buttons']}>
@@ -133,13 +141,16 @@ export default function Profile( {props} ) {
                                             <input id="file_input" name="postPicture" type="file" ref={fileInput} placeholder="" className={Styles['news-list_file-input']}/>
                                         </div>
 
-                                        <button id="publish" type="submit" onClick={() => {publishFunction(event, newPostInput, fileInput, setIsCorrect, isCorrect, user)}} className={Styles['second-button']}>Опубликовать</button>
+                                        <button id="publish" type="submit" onClick={(event) => {publishFunction(event, newPostInput, fileInput, setIsCorrect, isCorrect, user, setValidContent)}} className={Styles['second-button']}>Опубликовать</button>
                                     </div>
                                 </form>
                             </>
                         }
                         { isCorrect === false && 
                         <p className={Styles["error-text"]}>Кажется, вы ничего не написали</p>
+                        }
+                        { validContent === false && 
+                        <p className={Styles["error-text"]}>Кажется вы использовали в своём посте неприемлимые символы</p>
                         }
                         {  sortedPosts && 
                             <div className={Styles["news-block_list"]}>
@@ -165,7 +176,7 @@ export default function Profile( {props} ) {
                                     Поделитесь с окружающими своими мыслями, жизненным
                                     опытом и впечатлениями.
                                 </p>
-                                <form className={isCorrect === false ? `error-input ${Styles['news-list_input']} ${Styles['error-input']}` : Styles['news-list_input']}>
+                                <form ref={postForm} className={isCorrect === false ? `error-input ${Styles['news-list_input']} ${Styles['error-input']}` : Styles['news-list_input']}>
                                     <input required type="text" ref={newPostInput} id="text" placeholder={`О чём думаете ${user.username}?`}/>
 
                                     <div className={Styles['news-list_input__buttons']}>
@@ -173,13 +184,16 @@ export default function Profile( {props} ) {
                                             <input id="file_input" name="postPicture" type="file" ref={fileInput} placeholder="" className={Styles['news-list_file-input']}/>
                                         </div>
 
-                                        <button id="publish" type="submit" onClick={() => {publishFunction(event, newPostInput, fileInput, setIsCorrect, isCorrect, user)}} className={Styles['second-button']}>Опубликовать</button>
+                                        <button id="publish" type="submit" onClick={(event) => {publishFunction(event, newPostInput, fileInput, setIsCorrect, isCorrect, user, setValidContent)}} className={Styles['second-button']}>Опубликовать</button>
                                     </div>
                                 </form>
                             </>
                         }
                         { isCorrect === false && 
                         <p className={Styles["error-text"]}>Кажется, вы ничего не написали</p>
+                        }
+                        { validContent === false && 
+                        <p className={Styles["error-text"]}>Кажется вы использовали в своём посте неприемлимые символы</p>
                         }
                     </div>      
                 }

@@ -32,6 +32,7 @@ export default function Chat() {
     const [currentChat, setCurrentChat] = useState(null);
     const [hasScrolled, setHasScrolled] = useState(false);
     const [isIntersecting, setIsIntersecting] = useState(false);
+    const [validContent, setValidContent] = useState(true)
 
     const chatId = location.pathname.split('/').pop();
 
@@ -160,18 +161,26 @@ export default function Chat() {
                         )
                     })}
                 </div>
-    
+
                 <form className={Styles["message-input"]}>
                         <input ref={newPostInput} placeholder="Отправить сообщение"/>
                         <div className={Styles["buttons"]}>
                             <div className={Styles['first-button']}>
                                 <input ref={fileInput} type="file" placeholder="" className={Styles['news-list_file-input']}/>
                             </div>
-                            <button onClick={(event) => {publishMessageFunction(event, newPostInput, setIsCorrect, isCorrect, chatId, user, fileInput)}} className={Styles["blue-button"]}>
+                            <button onClick={(event) => {publishMessageFunction(event, newPostInput, setIsCorrect, isCorrect, chatId, user, fileInput, setValidContent, validContent)}} className={Styles["blue-button"]}>
                                 <img src="/images/new-block/send_button.svg"/>
                             </button>
                         </div>
-                </form>
+                </form> 
+                { validContent === false &&
+                <div className={Styles['error-block']}>
+                    <button onClick={() => {setValidContent(true)}}>
+                        <img src="/images/friends/cross.svg"/>
+                    </button>
+                    <p>Кажется вы использовали в своём сообщении неприемлимые символы</p>
+                </div>
+                }
             </div>
         )
     }

@@ -89,7 +89,6 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  scrollbar-width: none;
 }
 
 body {
@@ -123,25 +122,25 @@ a:hover {
 }
 
 .error-message {
-  color: #F23F42;
+  color: #fc3135;
   font-weight: 600;
   font-size: 12px;
   margin: 0% 0% 4% 0%;
 }
 
 .error-message_avatar {
-  color: #F23F42;
+  color: #fc3135;
   font-weight: 600;
   font-size: 14px;
   margin: 2% 0% 4% 0%;
 }
 
 .error-block {
-  border: solid 2px #F23F42 !important;
+  border: solid 2px #fc3135 !important;
 }
 
 .error-input {
-  border: solid 2px #F23F42 !important;
+  border: solid 2px #fc3135 !important;
   animation: shaking 1s ease-in-out;
 }
 

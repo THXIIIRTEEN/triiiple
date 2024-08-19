@@ -16,12 +16,21 @@ import { useRef, useEffect, useState } from 'react';
 export default function SecondPage(props) {
 
     const { router, setSecondPage, setIdentical, setIsUserExist, userData } = props.options;
+    console.log(props.validContent)
 
     const fileInputRef = useRef(null);
     const imageBackgroundRef = useRef(null);
     const imageInputBLock = useRef(null);
 
+    const textarea = useRef(null);
+
     const [incorrectFile, setIncorrectFile] = useState(false);
+
+    useEffect(() => {
+        if (props.validContent === false) {
+            textarea.current.classList.add("error-block")
+        }
+    }, [props.validContent])
 
     const uploadProfile = (event) => {
         var target = event.target;
@@ -63,13 +72,17 @@ export default function SecondPage(props) {
                     </div>
                     <div className={Styles['profile_input__right-section']}>
                             <label className={Styles['textarea_label']} htmlFor="textarea">{userData.username}</label>
-                            <textarea className={Styles['textarea']} maxLength={60} id="textarea" placeholder="Расскажите о себе"></textarea>
+                            <textarea ref={textarea} className={Styles['textarea']} maxLength={60} id="textarea" placeholder="Расскажите о себе"></textarea>
                     </div>
                 </div>
             </div>
 
             { incorrectFile === true && 
                 (<p className="error-message_avatar">Загруженный файл должен быть изображением</p>)
+            }
+
+            { props.validContent === false &&
+                    (<p className="error-message">Кажется вы использовали в своём описании неприемлимые символы</p>)
             }
 
             <div className={Styles['login_form_section']}>

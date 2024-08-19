@@ -1,3 +1,4 @@
+import { validateMessageContent } from "@/app/authorization/data-utils/validateContentFunction";
 import { postUtils } from "../data-functions/postFunction";
 
 export const likeFunction = async (user, props, setActive, setLikes, likes) => {
@@ -16,12 +17,15 @@ export const deletePost = async (event, props) => {
     location.reload();
 }
 
-export const postNewComment = async(event, setCommentError, commentError, commentInput, user, props) => {
+export const postNewComment = async(event, setCommentError, commentError, commentInput, user, props, setValidContent, validContent) => {
     event.preventDefault();
     if (commentInput.current.value === "") {
         setCommentError(!commentError)
     }
-    if (commentInput.current.value != "") {
+    
+    setValidContent(validateMessageContent(commentInput.current.value));
+
+    if (commentInput.current.value != "" && validateMessageContent(commentInput.current.value) === true) {
         const data = {
             author: user._id,
             time: new Date(),

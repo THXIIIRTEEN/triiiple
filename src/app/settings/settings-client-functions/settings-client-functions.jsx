@@ -1,3 +1,4 @@
+import { validateMessageContent } from "@/app/authorization/data-utils/validateContentFunction";
 import { settingsUtils } from "../settings-functions/settings-functions";
 
 export const showInput = (setShow) => {
@@ -90,7 +91,7 @@ export const updateProfilePicture = (event, user, setIncorrectFile, imageInputBL
     }           
 }
 
-export const updateUsername = async (event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist, setUsernameError) => {
+export const updateUsername = async (event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist, setUsernameError, setValidContent) => {
     event.preventDefault();
 
     if (usernameInput.current.value.length < 4) {
@@ -105,32 +106,41 @@ export const updateUsername = async (event, user, usernameInput, setInvalidUsern
             usernameInputBlock.current.classList.add('error-input')
             setUsernameError(true);
         } else {
-            setUsernameError(false);
-            const data = {
-                id: user._id,
-                username: usernameInput.current.value
-            }
-            const result = await settingsUtils.updateUsername(data);
-            if (!result) {
-                setUsernameExist(true)
-                usernameInputBlock.current.classList.add('error-input')
-            }
-    
-            if (result) {
-                location.reload();
+            setValidContent(validateMessageContent(usernameInput.current.value));
+            if (validateMessageContent(usernameInput.current.value) === true) {
+                setUsernameError(false);
+                const data = {
+                    id: user._id,
+                    username: usernameInput.current.value
+                }
+                const result = await settingsUtils.updateUsername(data);
+                if (!result) {
+                    setUsernameExist(true)
+                    usernameInputBlock.current.classList.add('error-input')
+                }
+        
+                if (result) {
+                    location.reload();
+                }
             }
         }    
         
     }
 }
 
-export const updateAboutMe = async (event, user, AboutMe) => {
+export const updateAboutMe = async (event, user, AboutMe, setAboutValidContent) => {
     event.preventDefault();
 
-    const data = {
-        id: user._id,
-        about_user: AboutMe.current.value
+    setAboutValidContent(validateMessageContent(AboutMe.current.value))
+
+    if (validateMessageContent(AboutMe.current.value) === true) {
+        const data = {
+            id: user._id,
+            about_user: AboutMe.current.value
+        }
+        await settingsUtils.updateAboutMe(data);
+        location.reload();
     }
-    await settingsUtils.updateAboutMe(data);
-    location.reload();
+
+    
 }

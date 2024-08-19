@@ -1,9 +1,10 @@
+import { validateMessageContent } from "@/app/authorization/data-utils/validateContentFunction";
 import { useStore } from "@/app/authorization/data-utils/zustand-functions";
 import { friendUtils } from "@/app/friends/FriendFunctions/FriendFunctions";
 import { messagerUtils } from "@/app/messanger/messagerFunctions/messagerFunction";
 import { postUtils } from "@/app/news/data-functions/postFunction";
 
-export const publishFunction = (event, newPostInput, fileInput, setIsCorrect, isCorrect, user) => {
+export const publishFunction = (event, newPostInput, fileInput, setIsCorrect, isCorrect, user, setValidContent) => {
     event.preventDefault();
 
     const textInputValue = newPostInput.current.value;
@@ -13,8 +14,10 @@ export const publishFunction = (event, newPostInput, fileInput, setIsCorrect, is
     } else if (textInputValue != "" || fileInput.current.files.length != 0) {
         setIsCorrect(true);
     }
+
+    setValidContent(validateMessageContent(textInputValue));
     
-    if (isCorrect === true && (newPostInput.current.value != "" || fileInput.current.files.length != 0)) {
+    if (isCorrect === true && (newPostInput.current.value != "" || fileInput.current.files.length != 0) && validateMessageContent(textInputValue) === true) {
         const postFormData = new FormData();
         const postUserData = {
             author: user.username,

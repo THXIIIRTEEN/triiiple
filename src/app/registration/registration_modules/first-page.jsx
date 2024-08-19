@@ -12,16 +12,24 @@ import { setObjectData } from "../registration_functions/registration_functions"
 //REACT IMPORTS
 
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function FirstPage(props) {
 
-    const {isIdentical, isUserExist, PasswordLengthError, UsernameLengthError, usernameError} = props;
+    const {isIdentical, isUserExist, PasswordLengthError, UsernameLengthError, usernameError, validContent} = props;
+    const usernameInput = useRef(null)
+
+    useEffect(() => {
+        if (validContent === false) {
+            usernameInput.current.classList.add("error-block")
+        }
+    }, [validContent])
 
     return (
         <>
             <div className={Styles['login_form_section']}>
                 <label htmlFor="username" className={Styles['form_label']}>Имя пользователя</label>
-                <input type="text" minLength={4} maxLength={16} onChange={notEmptyCheck} required autoComplete="off" id="username" className={`${isUserExist === false ? (UsernameLengthError ? Styles['form_input__error'] : Styles['form_input']) : Styles['form_input__error']}`} placeholder="Придумайте имя пользователя"/>
+                <input ref={usernameInput} type="text" minLength={4} maxLength={16} onChange={notEmptyCheck} required autoComplete="off" id="username" className={`${isUserExist === false ? (UsernameLengthError ? Styles['form_input__error'] : Styles['form_input']) : Styles['form_input__error']}`} placeholder="Придумайте имя пользователя"/>
 
                 { isUserExist === true &&
                     (<p className="error-message">Пользователь с таким именем уже существует</p>)
@@ -33,6 +41,10 @@ export default function FirstPage(props) {
 
                 { usernameError === true &&
                     (<p className="error-message">В имени пользователя должны быть только латинские символы</p>)
+                }
+
+                { validContent === false &&
+                    (<p className="error-message">Кажется вы использовали в своём никнейме неприемлимые символы</p>)
                 }
 
                 <label htmlFor="password" className={Styles['form_label']}>Пароль</label>

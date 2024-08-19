@@ -12,7 +12,7 @@ import Styles from "../Settings.module.css";
 
 //REACT IMPORTS
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export default function Settings() {
 
@@ -22,6 +22,8 @@ export default function Settings() {
     const [showUsernameInput, setShowUsernameInput] = useState(false);
     const [showAboutUser, setShowAboutUser] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [ validContent, setValidContent ] = useState(true);
+    const [ aboutValidContent, setAboutValidContent ] = useState(true)
 
     const [incorrectFile, setIncorrectFile] = useState(false);
     const [image, setImage] = useState(user.profile);
@@ -45,6 +47,19 @@ export default function Settings() {
     const usernameInputBlock = useRef(null);
 
     const AboutMe = useRef(null);
+    const aboutMeForm = useRef(null)
+
+    useEffect(() => {
+        if (validContent === false) {
+            usernameInputBlock.current.classList.add('error-block')
+        }
+    }, [validContent])
+
+    useEffect(() => {
+        if (aboutValidContent === false) {
+            aboutMeForm.current.classList.add('error-block')
+        }
+    }, [aboutValidContent])
 
     return (
         <div className={Styles['settings_block']}>
@@ -84,7 +99,7 @@ export default function Settings() {
                         <form ref={usernameInputBlock} className={Styles['username_input']}>
                             <input ref={usernameInput} placeholder={user.username}/>
 
-                            <button onClick={(event) => {updateUsername(event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist, setUsernameError)}}>
+                            <button onClick={(event) => {updateUsername(event, user, usernameInput, setInvalidUsernameLength, usernameInputBlock, setUsernameExist, setUsernameError, setValidContent)}}>
                                 <img src="/images/new-block/send_button.svg"/>
                             </button>
                         </form>
@@ -95,9 +110,11 @@ export default function Settings() {
                     {   invalidUsernameLength === true &&
                         <p className={Styles['error-message']}>Имя пользователя должно быть больше 3 символов</p>
                     }
-
                     { usernameError === true &&
                         <p className={Styles['error-message']}>В имени пользователя должны быть только латинские символы</p>
+                    }
+                    { validContent === false && 
+                    <p className={Styles['error-message']}>Кажется вы использовали в своём никнейме неприемлимые символы</p>
                     }
 
                     <div className={Styles['settings_block_category-name']}>
@@ -110,12 +127,15 @@ export default function Settings() {
                         <p>{user.about_user}</p>
                     }
                     {   showAboutUser === true &&
-                        <form className={`${Styles['username_input']} ${Styles['about-user_input']}`}>
-                            <textarea ref={AboutMe} rows={4} placeholder={user.about_user} />
-                            <button onClick={(event) => {updateAboutMe(event, user, AboutMe)}}>
+                        <form ref={aboutMeForm} className={`${Styles['username_input']} ${Styles['about-user_input']}`}>
+                            <textarea ref={AboutMe} maxlength="100" rows={4} placeholder={user.about_user} />
+                            <button onClick={(event) => {updateAboutMe(event, user, AboutMe, setAboutValidContent)}}>
                                 <img src="/images/new-block/send_button.svg"/>
                             </button>
                         </form>
+                    }
+                    { aboutValidContent === false && 
+                    <p className={Styles['error-message']}>Кажется вы использовали в своём описании неприемлимые символы</p>
                     }
                     <div className={Styles['settings_block_category-name']}>
                         <h2 onClick={() => {showPasswordFunction(setShowPassword, showPassword)}}>Пароль</h2>
